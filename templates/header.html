@@ -1,4 +1,4 @@
-{% extends "index.html" %}
+{% include "index.html" %}
 {% block header %}
 <div class="navbar navbar-inverse navbar-fixed-top">
   <header>
@@ -37,7 +37,7 @@
               {% endif %}
             </div>
             <div class="col-xs-4">
-              <a href="/{{ url }}" class="btn">{{ url_linktext }}</a>
+              <a href="http://localhost:8080{{ url }}" class="btn">{{ url_linktext }}</a>
             </div>
             <div class="main-menu-button col-xs-2">
               <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">
