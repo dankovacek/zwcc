@@ -65,4 +65,8 @@ form {
     padding: 0.25em;
 }
 
+.pwd_error {
+  font-size: 1.25em;
+  color: #fff;
+}
 

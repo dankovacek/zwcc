@@ -13,16 +13,17 @@
   <body>
   {% block header %}
   {% endblock %}
-    <form method="post" action="/{{ login_out }}" style="text-align:center; font: 13px sans-serif">
+    <form method="post" style="text-align:center; font: 13px sans-serif">
       <div class='login-form'>
         <h3>Not logged in</h3>
           <label for="email">Email:</label>
           <input name="email" type="email" value="{{ email }}" id="email">
-          <br>{{ email_error }}
+          <p class="error-msg">{{ email_error }}</p>
 
           <label for="password">Password:</label>
           <input name="password" type="password">
-          <br>{{ password_error }}
+          <p class="error-msg">{{ pwd_error1 }}</p>
+          <p class="error-msg">{{ pwd_error2 }}</p>
 
           <input name="admin" type="checkbox" value="True" id="admin">
             <label for="admin">Sign in as Administrator</label><br>

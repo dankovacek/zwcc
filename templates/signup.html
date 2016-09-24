@@ -13,20 +13,24 @@
   <body>
   {% block header %}
   {% endblock %}
-    <form method="post" action="/signup">
+    <form method="post">
       <div class='login-form'>
         <h3>New Account Signup</h3>
           <label for="username">Name:</label>
-          <input name="username" type="text" value="{{ email }}" id="email">
-          <br>{{ uname_error }}
+          <input name="username" type="text" value="{{ username }}" id="email">
+          <p class="error-msg">{{ uname_error }}</p>
+
+          <label for="username">Password:</label>
+          <input name="password" type="password" value="" id="password">
+          <p class="error-msg">{{ pwd_error }}</p>
 
           <label for="email">Email:</label>
           <input name="email" type="email" value="{{ email }}" id="email">
-          <br>{{ email_error }}
+          <p class="error-msg">{{ email_error }}</p>
 
           <label for="team">Organization Name:</label>
           <input name="team" type="text" value="{{ team }}" id="team">
-          <br>{{ team_error }}
+          <p class="error-msg">{{ team_error }}</p>
 
           <input name="admin" type="checkbox" value="True" id="admin">
             <label for="admin">Register as Administrator</label><br>

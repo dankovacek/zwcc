@@ -17,13 +17,20 @@
 # [START imports]
 import os
 import urllib
+import re
 
 from google.appengine.api import users
 from google.appengine.ext import ndb
+from google.appengine.api import memcache
 
 import jinja2
 import webapp2
+
+# code for sessions module
+# http://webapp2.readthedocs.io/en/latest/_modules/webapp2_extras/sessions.html
 from webapp2_extras import sessions
+
+
 
 import xlrd
 import datetime
@@ -37,6 +44,8 @@ JINJA_ENVIRONMENT = jinja2.Environment(
     autoescape=True)
 
 # webapp2 session configuration
+# http://stackoverflow.com/questions/13421614/missing-configuration-keys-
+# for-webapp2-extras-sessions-secret-key
 config = {}
 
 config['webapp2_extras.sessions'] = {
@@ -69,6 +78,8 @@ class Handler(webapp2.RequestHandler):
         self.write(self.render_str(template, **kw))
 
     #get a session store for this request
+    #http://webapp2.readthedocs.io/en/latest/_modules/webapp2_extras/appengine/sessions_memcache.html
+    #http://stackoverflow.com/questions/33921819/using-sessions-with-webapp2-python
     def dispatch(self):
         self.session_store = sessions.get_store(request=self.request)
 
@@ -100,19 +111,25 @@ class User(ndb.Model):
     email = ndb.StringProperty(required=True)
     team = ndb.StringProperty(required=True)
     name = ndb.StringProperty(required=True)
-
+    password = ndb.StringProperty(required=True)
     date = ndb.DateTimeProperty(auto_now_add=True)
     #TODO: link Team to User
     team_img = ndb.StringProperty(required=True)
 
     @classmethod
     def by_name(cls, name):
-        u = User.all().filter('name =', name).get()
+        print '#### get by name =   %s' % name
+        #u = User.all().filter('name =', name).get()
+        u = User.gql("WHERE name = :name", name = name)
+        result = u.get()
         return u
 
     @classmethod
     def by_email(cls, email):
-        u = User.all().filter('email =', email).get()
+        print '#### get by email =   %s' % email
+        #u = User.all().filter('email =', email).get()
+        u = User.gql("WHERE email = :email", email = email)
+        result = u.get()
         return u
 
 # [START audit]
@@ -286,23 +303,29 @@ class Login(Handler):
         pwd = self.request.get('password')
         email_error, password_error = None, None
 
-        # user = User.by_email(email)
-        # if user:
-        #     user_error = "User account already exists"
-
-        #u = User.by_email(email)
+        # if login isn't in DB, redirect to signup page
+        user = User.by_email(email)
+        if not user:
+            self.redirect('/signup')
 
         if not email:
             email_error = "Please use a valid e-mail address."
 
-        if not pwd:
-            password_error = "Please use only alphanumeric characters."
+        #validate password
+        #http://stackoverflow.com/questions/2990654/how-to-test-a-regex-password-in-python
+        if not re.match(r'[A-Za-z0-9@#$%^&+=]{8,}', password):
+            pwd_error1 = "Password must be alphanumeric and > 8 characters."
+
+        if user.password != pwd:
+            pwd_error2 = "Incorrect password."
 
         if (email_error or password_error):
             self.render("login.html", email=email,
-                email_error=email_error, password_error=password_error)
+                email_error=email_error, pwd_error1=password_error,
+                pwd_error2=pwd_error2)
             self.render('header.html', user='', url='', login_out='login')
         else:
+            self.session['email'] = email
             self.redirect("/")
 
 class Signup(Handler):
@@ -313,10 +336,10 @@ class Signup(Handler):
     def post(self):
         username = self.request.get('username')
         email = self.request.get('email')
+        password = self.request.get('password')
         team = self.request.get("team")
         #team_img = self.request.get("team_image")
-        email_error, team_error, uname_error = None, None, None
-
+        email_error, team_error, uname_error, pwd_error = '','','',''
 
         # user = User.by_email(email)
         # if user:
@@ -331,38 +354,37 @@ class Signup(Handler):
         if not username:
             uname_error = "Please enter a username."
 
-        if (email_error or team_error):
-            self.render("login.html", username=username, email=email, team=team,
-             uname_error=uname_error, team_error=team_error, email_error=email_error)
+        #validate password
+        #http://stackoverflow.com/questions/2990654/how-to-test-a-regex-password-in-python
+        if not re.match(r'[A-Za-z0-9@#$%^&+=]{8,}', password):
+            pwd_error = "Please enter an alphanumeric password >= 8 characters long."
+
+        if (email_error or team_error or uname_error or pwd_error):
+            self.render("signup.html", username=username, email=email, team=team,
+             uname_error=uname_error, team_error=team_error,
+             email_error=email_error, pwd_error=pwd_error)
             self.render('header.html', team_img='', login_out='login')
         else:
             #create a new user
-            create_user(username, email, team)
-            self.redirect("/")
+            self.session['email'] = email
+            create_user(username, email, password, team, self.session)
+            self.redirect('/')
 
-def create_user(name, email, team_name):
+
+def create_user(name, email, password, team_name, session_obj):
     u = User.by_email(email)
 
-    print 'email here?  %s' % u.email
+    print 'email here?  %s' % u
 
     # check if user already exists.
-    if u:
-        #msg = 'User already registered.'
-        self.redirect('/')
-    else:
-        new_user = User(name=name, email=email, team=team_name)
+    if not u:
+        new_user = User(name=name, password=password, email=email, team=team_name)
         new_user.put()
-        self.session['email'] = u.email
-        self.redirect('/')
 
 class Logout(Handler):
     def get(self):
-        logout_url = 'http://localhost:8080' + users.create_logout_url('/')
-        #user = users.get_current_user()
-        print '##########  user %s' % user
-        self.render('login.html', user=user, login_out='login',
-            logout_url=logout_url)
-        self.render('header.html', user=user, team_name='')
+        self.session['email'] = None
+        self.redirect('/')
 
 # [START app]
 app = webapp2.WSGIApplication([
