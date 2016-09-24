@@ -18,19 +18,21 @@
     <script src="/js/bootstrap.min.js"></script>
     <!-- [END head js] -->
     <!-- [Start Sliding Sidebar Menu Script] -->
+    <!-- https://github.com/BlackrockDigital/startbootstrap-simple-sidebar/blob/master/index.html -->
     <script>
-    $("#menu-toggle").click(function(e) {
+      $("#menu-toggle").click(function(e) {
         e.preventDefault();
         $("#wrapper").toggleClass("toggled");
     });
     </script>
-    <!-- [End Sliding Sidebar Menu Script] -->
+    <!-- [Start Sliding Sidebar Menu Script] -->
   </head>
   <body>
+  <div style="container">
 
     {% include 'header.html' %}
     {% include 'content.html' %}
-
+  </div>
     <!-- [START footer js] -->
     <script src="js/bootstrap.min.js" async defer></script>
     <!-- [END footer js] -->

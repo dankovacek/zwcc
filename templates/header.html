@@ -1,105 +1,103 @@
 
 {% block header %}
 <div class="navbar navbar-inverse navbar-fixed-top">
-  <header>
-    <div class="navbar-inner">
-      <div class="container">
-        <!--<button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>-->
-        <div class="row">
-          <div class="header-zwcc col-xs-6 col-md-8 text-left">
-            <div class="col-xs-6">
-              <a href="#">Zero Waste Leaders</a>
-            </div>
-            <div class="col-xs-6">
-              {% if user %}
-              <a href="#"><em>{{ user.team }}<em></a>
-              {% else %}
-              <a href="#"> <em>- Leaderboard </em></a>
-              {% endif %}
-            </div>
-          </div>
+    <header>
+        <div class="navbar-inner">
 
-          <div class="header-tools col-xs-6 col-md-4 text-right">
-            <!--<a href="{{ url|safe }}" class="btn">{{ url_linktext }}</a>-->
-            {% if user %}
-            <div class="add-audit col-xs-3">
-              <a href="#"><span class="glyphicon glyphicon-plus"></span></a>
-            </div>
-            <div class="team-img col-xs-3">
-              {% if user.team_img %}
-              <img src="{{ user.team_img }}" class="img-responsive">
-              {% else %}
-              <img src="/images/blank_user.gif" class="img-responsive">
-              {% endif %}
-            </div>
-            <div class="col-xs-4">
-              <a href="http://localhost:8080{{ url }}" class="btn">{{ url_linktext }}</a>
-            </div>
-            <div class="main-menu-button col-xs-2">
-              <a href="#menu-toggle" id="menu-toggle">
-              <span class="glyphicon glyphicon-menu-hamburger" id="menu-toggle">
-              </span>
-              </a>
-            </div>
-            {% else %}
-            <div class="col-xs-12">
-              <a href="/login" class="btn">Login</a>
-              <a class="btn">or</a>
-              <a href="/signup" class="btn">Signup</a>
-            </div>
-            {% endif %}
-          </div>
+            <div class="container">
+                <div class="row">
 
+                    <div class="header-zwcc col-xs-6 col-md-8 text-left">
+                        <div class="col-xs-6">
+                          <a href="#">Zero Waste Leaders</a>
+                        </div>
+                        <div class="col-xs-6">
+                          {% if user %}
+                          <a href="#"><em>{{ user.team }}<em></a>
+                          {% else %}
+                          <a href="#"> <em>- Leaderboard </em></a>
+                          {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="header-tools col-xs-6 col-md-4 text-right">
+                      <!--<a href="{{ url|safe }}" class="btn">{{ url_linktext }}</a>-->
+                        {% if user %}
+                        <div class="add-audit col-xs-3">
+                          <a href="#"><span class="glyphicon glyphicon-plus"></span></a>
+                        </div>
+
+                        <div class="col-xs-4">
+                          <a href="http://localhost:8080{{ url }}" class="btn">{{ url_linktext }}</a>
+                        </div>
+                        <div class="main-menu-button col-xs-2">
+                          <a href="#menu-toggle" id="menu-toggle">
+                            <span class="glyphicon glyphicon-menu-hamburger">
+                            </span>
+                          </a>
+                        </div>
+                        {% else %}
+                        <div class="col-xs-12">
+                          <a href="/login" class="btn">Login</a>
+                          <a class="btn">or</a>
+                          <a href="/signup" class="btn">Signup</a>
+                        </div>
+                        {% endif %}
+                    </div>
+
+                </div>
+
+            </div>
         </div>
-      </div>
-    </div>
-  </header>
+    </header>
 </div>
 
 <!-- Start Sliding Menu -->
 <div id="wrapper">
-        <!-- Sidebar -->
-        <div id="sidebar-wrapper">
-            <ul class="sidebar-nav">
-                <li class="sidebar-brand">
-                    <a href="#">
-                        Start Bootstrap
-                    </a>
-                </li>
-                <li>
-                    <a href="#">Dashboard</a>
-                </li>
-                <li>
-                    <a href="#">Shortcuts</a>
-                </li>
-                <li>
-                    <a href="#">Overview</a>
-                </li>
-                <li>
-                    <a href="#">Events</a>
-                </li>
-                <li>
-                    <a href="#">About</a>
-                </li>
-                <li>
-                    <a href="#">Services</a>
-                </li>
-                <li>
-                    <a href="#">Contact</a>
-                </li>
-            </ul>
-        </div>
+  <!-- Sidebar -->
+    <div id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+            <li>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            {% if user.team_img %}
+                            <img src="{{ user.team_img }}" class="team-img img-responsive">
+                            {% else %}
+                            <img src="/images/blank_user.gif" class="img-responsive">
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="sidebar-brand">
+                <h2>{{ user.team }}</h2>
+            </li>
+            <li>
+                <a href="#">Dashboard</a>
+            </li>
+            <li>
+                <a href="#">Shortcuts</a>
+            </li>
+            <li>
+                <a href="#">Overview</a>
+            </li>
+            <li>
+                <a href="#">Events</a>
+            </li>
+            <li>
+                <a href="#">About</a>
+            </li>
+            <li>
+                <a href="#">Services</a>
+            </li>
+            <li>
+                <a href="/logout"><h3>Logout</h3></a>
+            </li>
+        </ul>
+    </div>
+</div>
 
-        <script>
-    $("#menu-toggle").click(function(e) {
-        e.preventDefault();
-        $("#wrapper").toggleClass("toggled");
-    });
-    </script>
 <!-- End Sliding Menu -->
 
 
