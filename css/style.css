@@ -60,6 +60,11 @@ form {
     border: 0;
 }
 
+.main-menu-button {
+  font-size: 1.5em;
+  color: #fff;
+}
+
 .user-photo {
     width: 100%;
     padding: 0.25em;

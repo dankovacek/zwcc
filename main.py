@@ -196,20 +196,13 @@ class MainPage(Handler):
             url_linktext = 'Login'
             u = None
 
-        self.render('index.html')
-        self.render('header.html', user=u, url_linktext=url_linktext, url=url)
-        self.render('content.html', user=u, audits=audits, url=url)
-
         upload_url = blobstore.create_upload_url('/upload')
 
-        html_string = """
-         <form action="%s" method="POST" enctype="multipart/form-data">
-        Upload File:
-        <input type="file" name="file"> <br>
-        <input type="submit" name="submit" value="Submit">
-        </form>""" % upload_url
+        self.render('index.html')
+        self.render('header.html', user=u, url_linktext=url_linktext, url=url)
+        self.render('content.html', user=u, audits=audits, url=url,
+            upload_url=upload_url)
 
-        self.response.write(html_string)
 
 # [END main_page]
 
