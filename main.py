@@ -24,7 +24,6 @@ from google.appengine.ext import ndb
 import jinja2
 import webapp2
 
-
 template_dir = os.path.join(os.path.dirname(__file__), 'templates')
 JINJA_ENVIRONMENT = jinja2.Environment(
     loader=jinja2.FileSystemLoader(template_dir),
@@ -36,7 +35,6 @@ JINJA_ENVIRONMENT = jinja2.Environment(
 #    autoescape = True)
 
 DEFAULT_GUESTBOOK_NAME = 'Zero Waste City Challenge'
-
 
 # We set a parent key on the 'Greetings' to ensure that they are all
 # in the same entity group. Queries across the single entity group
@@ -91,6 +89,7 @@ class MainPage(Handler):
         greetings = greetings_query.fetch(10)
 
         user = users.get_current_user()
+
         if user:
             url = users.create_logout_url(self.request.uri)
             url_linktext = 'Logout'
@@ -98,21 +97,12 @@ class MainPage(Handler):
             url = users.create_login_url(self.request.uri)
             url_linktext = 'Login'
 
-        template_values = {
-            'user': user,
-            'greetings': greetings,
-            'guestbook_name': urllib.quote_plus(guestbook_name),
-            'url': url,
-            'url_linktext': url_linktext,
-        }
+        print '$$$$$$$$$$$4 url_linktext = %s' % url_linktext
 
-        #template = JINJA_ENVIRONMENT.get_template('index.html')
-        #self.response.write(template.render(template_values))
-        #self.response.write()
         self.render('index.html')
+        self.render('header.html', url=url, url_linktext=url_linktext)
         self.render('content.html', user=user, greetings=greetings,
-            guestbook_name=guestbook_name, url=url)
-        self.render('header.html', url_linktext=url_linktext)
+            guestbook_name=urllib.quote_plus(guestbook_name), url=url)
 # [END main_page]
 
 
