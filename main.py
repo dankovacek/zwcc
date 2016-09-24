@@ -25,6 +25,11 @@ import jinja2
 import webapp2
 from webapp2_extras import sessions
 
+import xlrd
+import datetime
+from google.appengine.ext import blobstore
+from google.appengine.ext.webapp import blobstore_handlers
+
 template_dir = os.path.join(os.path.dirname(__file__), 'templates')
 JINJA_ENVIRONMENT = jinja2.Environment(
     loader=jinja2.FileSystemLoader(template_dir),
@@ -52,6 +57,7 @@ config['webapp2_extras.sessions'] = {
 
 # add handlers for easier write calls
 class Handler(webapp2.RequestHandler):
+
     def write(self, *a, **kw):
         self.response.out.write(*a, **kw)
 
@@ -135,6 +141,11 @@ class Team(ndb.Model):
         t = by_team_name(team_name)
         return t
 
+
+class UploadPlaceholder(ndb.Model):
+    date = ndb.DateProperty()
+    data = ndb.StringProperty()
+    value = ndb.IntegerProperty()
 # [END audit]
 
 
@@ -171,6 +182,18 @@ class MainPage(Handler):
         self.render('index.html')
         self.render('header.html', user=u, url_linktext=url_linktext, url=url)
         self.render('content.html', user=u, audits=audits, url=url)
+
+        upload_url = blobstore.create_upload_url('/upload')
+
+        html_string = """
+         <form action="%s" method="POST" enctype="multipart/form-data">
+        Upload File:
+        <input type="file" name="file"> <br>
+        <input type="submit" name="submit" value="Submit">
+        </form>""" % upload_url
+
+        self.response.write(html_string)
+
 # [END main_page]
 
 # TODO: implement create Team Entity
@@ -189,6 +212,44 @@ class MainPage(Handler):
 #         new_user.put()
 #         user = getUserInfo(self, session_obj['email'])
 #         #return user
+
+
+# [START spreadsheet_import]
+
+class UploadHandler(blobstore_handlers.BlobstoreUploadHandler):
+    def post(self):
+        upload_files = self.get_uploads('file')  # 'file' is file upload field in the form
+        blob_info = upload_files[0]
+        process_spreadsheet(blob_info)
+
+        blobstore.delete(blob_info.key())  # optional: delete file after import
+        self.redirect("/")
+
+def read_rows(inputfile):
+    rows = []
+    wb = xlrd.open_workbook(file_contents=inputfile.read())
+    sh = wb.sheet_by_index(0)
+    for rownum in range(sh.nrows):
+        # rows.append(sh.row_values(rownum))
+        # return rows
+        date, data, value = sh.row_values(rownum)
+        entry = UploadPlaceholder(date=date, data=data, value=int(value))
+        entry.put()
+
+
+def process_spreadsheet(blob_info):
+    blob_reader = blobstore.BlobReader(blob_info.key())
+    #reader = csv.reader(blob_reader, delimiter=';')
+    wb = xlrd.open_workbook(file_contents=blob_reader.read())
+    sh = wb.sheet_by_index(0)
+    for rownum in range(1,sh.nrows):
+    #for row in reader:
+        date, data, value = sh.row_values(rownum)
+        entry = UploadPlaceholder(date=datetime.date(1900, 1, 1) + datetime.timedelta(int(date)-2), data=data, value=int(value))
+        entry.put()
+
+# [END spreadsheet_import]
+
 
 
 # [START guestbook]
@@ -310,5 +371,6 @@ app = webapp2.WSGIApplication([
     ('/signup', Signup),
     ('/login', Login),
     ('/logout', Logout),
+    ('/upload', UploadHandler)
 ], debug=True, config=config)
 # [END app]
