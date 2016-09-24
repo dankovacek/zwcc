@@ -36,7 +36,7 @@ JINJA_ENVIRONMENT = jinja2.Environment(
 
 DEFAULT_GUESTBOOK_NAME = 'Zero Waste City Challenge'
 
-# We set a parent key on the 'Greetings' to ensure that they are all
+# We set a parent key on the 'Audits' to ensure that they are all
 # in the same entity group. Queries across the single entity group
 # will be consistent. However, the write rate should be limited to
 # ~1/second.
@@ -63,19 +63,35 @@ def guestbook_key(guestbook_name=DEFAULT_GUESTBOOK_NAME):
     return ndb.Key('Guestbook', guestbook_name)
 
 
-# [START greeting]
-class Author(ndb.Model):
-    """Sub model for representing an author."""
+# [START user]
+class User(ndb.Model):
+    """Sub model for representing a user."""
     identity = ndb.StringProperty(indexed=False)
     email = ndb.StringProperty(indexed=False)
 
+    @classmethod
+    def by_name(cls, name):
+        u = User.all().filter('username =', name).get()
+        return u
 
-class Greeting(ndb.Model):
+    @classmethod
+    def by_email(cls, email):
+        u = User.all().filter('email =', email).get()
+        return u
+
+# [START audit]
+class Audit(ndb.Model):
     """A main model for representing an individual Guestbook entry."""
-    author = ndb.StructuredProperty(Author)
+    user = ndb.StructuredProperty(User)
     content = ndb.StringProperty(indexed=False)
     date = ndb.DateTimeProperty(auto_now_add=True)
-# [END greeting]
+
+class Team(ndb.Model):
+    admin = ndb.StructuredProperty(User)
+    team_name = ndb.StringProperty(required=True)
+    team_type = ndb.StringProperty(required=True)
+    date = ndb.DateTimeProperty(auto_now_add=True)
+# [END audit]
 
 
 # [START main_page]
@@ -84,9 +100,9 @@ class MainPage(Handler):
     def get(self):
         guestbook_name = self.request.get('guestbook_name',
                                           DEFAULT_GUESTBOOK_NAME)
-        greetings_query = Greeting.query(
-            ancestor=guestbook_key(guestbook_name)).order(-Greeting.date)
-        greetings = greetings_query.fetch(10)
+        audits_query = Audit.query(
+            ancestor=guestbook_key(guestbook_name)).order(-Audit.date)
+        audits = audits_query.fetch(10)
 
         user = users.get_current_user()
 
@@ -100,8 +116,9 @@ class MainPage(Handler):
         print '$$$$$$$$$$$4 url_linktext = %s' % url_linktext
 
         self.render('index.html')
-        self.render('header.html', url=url, url_linktext=url_linktext)
-        self.render('content.html', user=user, greetings=greetings,
+        self.render('header.html', url=url, url_linktext=url_linktext,
+            guestbook_name=guestbook_name, user=user)
+        self.render('content.html', user=user, audits=audits,
             guestbook_name=urllib.quote_plus(guestbook_name), url=url)
 # [END main_page]
 
@@ -110,27 +127,30 @@ class MainPage(Handler):
 class Guestbook(webapp2.RequestHandler):
 
     def post(self):
-        # We set the same parent key on the 'Greeting' to ensure each
-        # Greeting is in the same entity group. Queries across the
+        # We set the same parent key on the 'Audit' to ensure each
+        # Audit is in the same entity group. Queries across the
         # single entity group will be consistent. However, the write
         # rate to a single entity group should be limited to
         # ~1/second.
         guestbook_name = self.request.get('guestbook_name',
                                           DEFAULT_GUESTBOOK_NAME)
-        greeting = Greeting(parent=guestbook_key(guestbook_name))
+        audit = Audit(parent=guestbook_key(guestbook_name))
 
         if users.get_current_user():
-            greeting.author = Author(
+            audit.user = User(
                     identity=users.get_current_user().user_id(),
                     email=users.get_current_user().email())
 
-        greeting.content = self.request.get('content')
-        greeting.put()
+        audit.content = self.request.get('content')
+        audit.put()
 
         query_params = {'guestbook_name': guestbook_name}
         self.redirect('/?' + urllib.urlencode(query_params))
 # [END guestbook]
 
+class Login(Handler):
+    def get(self):
+        pass
 
 # [START app]
 app = webapp2.WSGIApplication([

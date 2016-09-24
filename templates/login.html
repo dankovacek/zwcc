@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+    <!-- [START css] -->
+    <link type="text/css" rel="stylesheet" href="/bootstrap/css/bootstrap.css">
+    <link type="text/css" rel="stylesheet" href="/bootstrap/css/bootstrap-responsive.css">
+    <link type="text/css" rel="stylesheet" href="/css/style.css">
+    <!-- [END css] -->
+  </head>
+  <body>
+  {% block header %}
+  {% endblock %}
+    <form method="get" action="/_ah/login" style="text-align:center; font: 13px sans-serif">
+      <div style="width: 20em; margin: 1em auto;
+                  text-align:left;
+                  padding: 0 2em 1.25em 2em;
+                  background-color: #d6e9f8;
+                  border: 2px solid #67a7e3">
+        <h3>Not logged in</h3>
+        <p style="padding: 0; margin: 0">
+          <label for="email" style="width: 3em">Email:</label>
+          <input name="email" type="email" value="test@example.com" id="email">
+          <label for="team" style="width: 3em">Team:</label>
+          <input name="team" type="team" value="test@example.com" id="team">
+        </p>
+        <p style="margin: .5em 0 0 3em; font-size:12px">
+          <input name="admin" type="checkbox" value="True" id="admin">
+            <label for="admin">Sign in as Administrator</label>
+        </p>
+        <p style="margin-left: 3em">
+          <input name="action" value="Login" type="submit" id="submit-login">
+          <input name="action" value="Logout" type="submit" id="submit-logout">
+        </p>
+      </div>
+    <input name="continue" type="hidden" value="http://localhost:8080/">
+    </form>
+  </body>
+</html>
+
