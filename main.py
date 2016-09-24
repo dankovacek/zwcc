@@ -32,9 +32,6 @@ JINJA_ENVIRONMENT = jinja2.Environment(
     autoescape=True)
 # [END imports]
 # os.path.dirname(__file__)
-
-
-
 #jinja_env = jinja2.Environment(loader = jinja2.FileSystemLoader(template_dir),
 #    autoescape = True)
 
@@ -45,6 +42,20 @@ DEFAULT_GUESTBOOK_NAME = 'Zero Waste City Challenge'
 # in the same entity group. Queries across the single entity group
 # will be consistent. However, the write rate should be limited to
 # ~1/second.
+
+# add handler for easier write calls
+
+class Handler(webapp2.RequestHandler):
+    def write(self, *a, **kw):
+        self.response.out.write(*a, **kw)
+
+    def render_str(self, template, **params):
+        t = JINJA_ENVIRONMENT.get_template(template)
+        return t.render(params)
+
+    def render(self, template, **kw):
+        self.write(self.render_str(template, **kw))
+
 
 def guestbook_key(guestbook_name=DEFAULT_GUESTBOOK_NAME):
     """Constructs a Datastore key for a Guestbook entity.
@@ -70,7 +81,7 @@ class Greeting(ndb.Model):
 
 
 # [START main_page]
-class MainPage(webapp2.RequestHandler):
+class MainPage(Handler):
 
     def get(self):
         guestbook_name = self.request.get('guestbook_name',
@@ -95,8 +106,13 @@ class MainPage(webapp2.RequestHandler):
             'url_linktext': url_linktext,
         }
 
-        template = JINJA_ENVIRONMENT.get_template('index.html')
-        self.response.write(template.render(template_values))
+        #template = JINJA_ENVIRONMENT.get_template('index.html')
+        #self.response.write(template.render(template_values))
+        #self.response.write()
+        self.render('index.html')
+        self.render('content.html', user=user, greetings=greetings,
+            guestbook_name=guestbook_name, url=url)
+        self.render('header.html', url_linktext=url_linktext)
 # [END main_page]
 
 
