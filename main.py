@@ -30,12 +30,13 @@ import webapp2
 # http://webapp2.readthedocs.io/en/latest/_modules/webapp2_extras/sessions.html
 from webapp2_extras import sessions
 
-
-
 import xlrd
 import datetime
 from google.appengine.ext import blobstore
 from google.appengine.ext.webapp import blobstore_handlers
+
+from models import User
+from models import Team
 
 template_dir = os.path.join(os.path.dirname(__file__), 'templates')
 JINJA_ENVIRONMENT = jinja2.Environment(
@@ -96,14 +97,6 @@ class Handler(webapp2.RequestHandler):
         return self.session_store.get_session()
 
 
-def guestbook_key(guestbook_name='temp'):
-    """Constructs a Datastore key for a Guestbook entity.
-
-    We use guestbook_name as the key.
-    """
-    return ndb.Key('Guestbook', guestbook_name)
-
-
 # [START user]
 class User(ndb.Model):
     """Sub model for representing a user."""
@@ -131,40 +124,6 @@ class User(ndb.Model):
         u = User.gql("WHERE email = :email", email = email)
         result = u.get()
         return u
-
-# [START audit]
-class Audit(ndb.Model):
-    """A main model for representing an individual Guestbook entry."""
-    user = ndb.StructuredProperty(User)
-    content = ndb.StringProperty(indexed=False)
-    date = ndb.DateTimeProperty(auto_now_add=True)
-
-class Team(ndb.Model):
-    admin = ndb.StructuredProperty(User)
-    team_name = ndb.StringProperty(required=True)
-    organization_type = ndb.StringProperty(required=True)
-    date = ndb.DateTimeProperty(auto_now_add=True)
-    team_img = ndb.StringProperty(required = False)
-
-    @classmethod
-    def by_team_name(cls, name):
-        t = Team.all().filter('team_name =', name).get()
-        return t
-
-    @classmethod
-    def by_user_email(cls, email):
-        u = User.all().filter('email =', email).get()
-        team_name = u.team
-        t = by_team_name(team_name)
-        return t
-
-
-class UploadPlaceholder(ndb.Model):
-    date = ndb.DateProperty()
-    data = ndb.StringProperty()
-    value = ndb.IntegerProperty()
-# [END audit]
-
 
 # [START main_page]
 class MainPage(Handler):
@@ -232,66 +191,6 @@ class MainPage(Handler):
 
 
 # [START spreadsheet_import]
-
-class UploadHandler(blobstore_handlers.BlobstoreUploadHandler):
-    def post(self):
-        upload_files = self.get_uploads('file')  # 'file' is file upload field in the form
-        blob_info = upload_files[0]
-        process_spreadsheet(blob_info)
-
-        blobstore.delete(blob_info.key())  # optional: delete file after import
-        self.redirect("/")
-
-def read_rows(inputfile):
-    rows = []
-    wb = xlrd.open_workbook(file_contents=inputfile.read())
-    sh = wb.sheet_by_index(0)
-    for rownum in range(sh.nrows):
-        # rows.append(sh.row_values(rownum))
-        # return rows
-        date, data, value = sh.row_values(rownum)
-        entry = UploadPlaceholder(date=date, data=data, value=int(value))
-        entry.put()
-
-
-def process_spreadsheet(blob_info):
-    blob_reader = blobstore.BlobReader(blob_info.key())
-    #reader = csv.reader(blob_reader, delimiter=';')
-    wb = xlrd.open_workbook(file_contents=blob_reader.read())
-    sh = wb.sheet_by_index(0)
-    for rownum in range(1,sh.nrows):
-    #for row in reader:
-        date, data, value = sh.row_values(rownum)
-        entry = UploadPlaceholder(date=datetime.date(1900, 1, 1) + datetime.timedelta(int(date)-2), data=data, value=int(value))
-        entry.put()
-
-# [END spreadsheet_import]
-
-
-
-# [START guestbook]
-class Guestbook(webapp2.RequestHandler):
-    def post(self):
-        # We set the same parent key on the 'Audit' to ensure each
-        # Audit is in the same entity group. Queries across the
-        # single entity group will be consistent. However, the write
-        # rate to a single entity group should be limited to
-        # ~1/second.
-        guestbook_name = self.request.get('guestbook_name',
-                                          DEFAULT_GUESTBOOK_NAME)
-        audit = Audit(parent=guestbook_key(guestbook_name))
-
-        if users.get_current_user():
-            audit.user = User(
-                    identity=users.get_current_user().user_id(),
-                    email=users.get_current_user().email())
-
-        audit.content = self.request.get('content')
-        audit.put()
-
-        query_params = {'guestbook_name': guestbook_name}
-        self.redirect('/?' + urllib.urlencode(query_params))
-# [END guestbook]
 
 class Login(Handler):
     def get(self):
@@ -393,6 +292,6 @@ app = webapp2.WSGIApplication([
     ('/signup', Signup),
     ('/login', Login),
     ('/logout', Logout),
-    ('/upload', UploadHandler)
+    ('/upload', data.UploadHandler)
 ], debug=True, config=config)
 # [END app]
