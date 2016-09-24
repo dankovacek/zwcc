@@ -18,7 +18,7 @@ class User(ndb.Model):
         #u = User.all().filter('name =', name).get()
         u = User.gql("WHERE name = :name", name = name)
         result = u.get()
-        return u
+        return result
 
     @classmethod
     def by_email(cls, email):
@@ -26,7 +26,7 @@ class User(ndb.Model):
         #u = User.all().filter('email =', email).get()
         u = User.gql("WHERE email = :email", email = email)
         result = u.get()
-        return u
+        return result
 # [START audit]
 class Audit(ndb.Model):
     """A main model for representing an individual Guestbook entry."""
