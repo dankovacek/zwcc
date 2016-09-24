@@ -129,7 +129,7 @@ class MainPage(Handler):
         upload_url = blobstore.create_upload_url('/upload')
         print '#######user email = %s' % u
 
-        self.render('index.html')
+        self.render('index.html', user=u)
 
 
 # [END main_page]
@@ -192,7 +192,6 @@ class Login(Handler):
 class Signup(Handler):
     def get(self):
         self.render('signup.html', user='', login_out='login')
-        self.render('header.html', team_name='')
 
     def post(self):
         username = self.request.get('username')

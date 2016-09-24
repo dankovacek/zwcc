@@ -9,6 +9,7 @@
     <link type="text/css" rel="stylesheet" href="/bootstrap/css/bootstrap-responsive.css">
     <link type="text/css" rel="stylesheet" href="/css/style.css">
     <link type="text/css" rel="stylesheet" href="/css/map.css">
+    <link type="text/css" rel="stylesheet" href="/css/sidebar-style.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@0.7.7/dist/leaflet.css" />
     <!-- [END css] -->
     <!-- [START head js] -->
@@ -16,12 +17,19 @@
     <script src="https://unpkg.com/leaflet@0.7.7/dist/leaflet.js"></script>
     <script src="/js/bootstrap.min.js"></script>
     <!-- [END head js] -->
+    <!-- [Start Sliding Sidebar Menu Script] -->
+    <script>
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+    </script>
+    <!-- [End Sliding Sidebar Menu Script] -->
   </head>
   <body>
 
     {% include 'header.html' %}
     {% include 'content.html' %}
-    {% include 'aside.html' %}
 
     <!-- [START footer js] -->
     <script src="js/bootstrap.min.js" async defer></script>
