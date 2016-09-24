@@ -1,6 +1,17 @@
-
 {% block map %}
 <div class="dash-main-content col-xs-12 text-center">
-    <img src="http://placehold.it/700x400" class="img-responsive">
+     <div id="map"></div>
 </div>
+<script type="text/javascript">
+
+	var mymap = L.map('map').setView([49.2827, -123.1207], 13);
+
+	L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+	    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+	    maxZoom: 18,
+	    id: 'ggfitzg.a016pdph',
+	    accessToken: 'pk.eyJ1IjoiZ2dmaXR6ZyIsImEiOiJjaXRobTlpdG0wMXpqMm5udjl2Y3lyOGhkIn0.r2I5wZU61YGXIErEqrhbhA'
+	}).addTo(mymap);
+
+</script>
 {% endblock %}

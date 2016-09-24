@@ -130,11 +130,6 @@ class MainPage(Handler):
         print '#######user email = %s' % u
 
         self.render('index.html')
-        # self.render('header.html', user=u, url_linktext=url_linktext, url=url)
-        # self.render('content.html', user=u, audits=audits, url=url,
-        #     upload_url=upload_url)
-        # self.render('map.html')
-        # self.render('aside.html')
 
 
 # [END main_page]

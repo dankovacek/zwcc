@@ -8,6 +8,7 @@
     <link type="text/css" rel="stylesheet" href="/bootstrap/css/bootstrap.css">
     <link type="text/css" rel="stylesheet" href="/bootstrap/css/bootstrap-responsive.css">
     <link type="text/css" rel="stylesheet" href="/css/style.css">
+    <link type="text/css" rel="stylesheet" href="/css/map.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@0.7.7/dist/leaflet.css" />
     <!-- [END css] -->
     <!-- [START head js] -->
@@ -17,8 +18,14 @@
     <!-- [END head js] -->
   </head>
   <body>
-      {% block header %}{% endblock %}
-      {% block content %}{% endblock %}
-      {% block aside %}{% endblock %}
+
+    {% include 'header.html' %}
+    {% include 'content.html' %}
+    {% include 'aside.html' %}
+
+    <!-- [START footer js] -->
+    <script src="js/bootstrap.min.js" async defer></script>
+    <!-- [END footer js] -->
+
   </body>
 </html>
