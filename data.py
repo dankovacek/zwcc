@@ -15,17 +15,12 @@
 # limitations under the License.
 
 # [START imports]
-
-
-
-import jinja2
-import webapp2
 import xlrd
 import datetime
 from google.appengine.ext import blobstore
 from google.appengine.ext.webapp import blobstore_handlers
 from google.appengine.ext import ndb
-from main import Audit
+from models import Audit
 
 # [START waste_item]
 class UploadPlaceholder(ndb.Model):

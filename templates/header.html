@@ -10,7 +10,7 @@
           <span class="icon-bar"></span>
         </button>-->
         <div class="row">
-          <div class="header-zwcc col-xs-6 col-lg-8 text-left">
+          <div class="header-zwcc col-xs-6 col-md-8 text-left">
             <div class="col-xs-6">
               <a href="#">Zero Waste Leaders</a>
             </div>
@@ -23,20 +23,24 @@
             </div>
           </div>
 
-          <div class="header-tools col-xs-6 col-lg-4 text-right">
+          <div class="header-tools col-xs-6 col-md-4 text-right">
             <!--<a href="{{ url|safe }}" class="btn">{{ url_linktext }}</a>-->
             {% if user %}
             <div class="add-audit col-xs-3">
               <a href="#"><span class="glyphicon glyphicon-plus"></span></a>
             </div>
             <div class="team-img col-xs-3">
+              {% if user.team_img %}
               <img src="{{ user.team_img }}" class="img-responsive">
+              {% else %}
+              <img src="/images/blank_user.gif" class="img-responsive">
+              {% endif %}
             </div>
-            <div class="col-xs-3">
+            <div class="col-xs-4">
               <a href="/{{ url }}" class="btn">{{ url_linktext }}</a>
             </div>
-            <div class="team-img col-xs-3">
-              <span class="glyphicon glyphicon-menu-hamburger"></span>
+            <div class="main-menu-button col-xs-2">
+              <span class="glyphicon glyphicon-menu-hamburger" id="menu-toggle"></span>
             </div>
             {% else %}
             <div class="col-xs-12">

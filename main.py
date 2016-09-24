@@ -38,6 +38,8 @@ from google.appengine.ext.webapp import blobstore_handlers
 from models import User
 from models import Team
 
+import data
+
 template_dir = os.path.join(os.path.dirname(__file__), 'templates')
 JINJA_ENVIRONMENT = jinja2.Environment(
     loader=jinja2.FileSystemLoader(template_dir),
@@ -96,35 +98,6 @@ class Handler(webapp2.RequestHandler):
         # Returns a session using the default cookie key.
         return self.session_store.get_session()
 
-
-# [START user]
-class User(ndb.Model):
-    """Sub model for representing a user."""
-    #identity = ndb.StringProperty(indexed=False)
-    email = ndb.StringProperty(required=True)
-    team = ndb.StringProperty(required=True)
-    name = ndb.StringProperty(required=True)
-    password = ndb.StringProperty(required=True)
-    date = ndb.DateTimeProperty(auto_now_add=True)
-    #TODO: link Team to User
-    team_img = ndb.StringProperty(required=True)
-
-    @classmethod
-    def by_name(cls, name):
-        print '#### get by name =   %s' % name
-        #u = User.all().filter('name =', name).get()
-        u = User.gql("WHERE name = :name", name = name)
-        result = u.get()
-        return u
-
-    @classmethod
-    def by_email(cls, email):
-        print '#### get by email =   %s' % email
-        #u = User.all().filter('email =', email).get()
-        u = User.gql("WHERE email = :email", email = email)
-        result = u.get()
-        return u
-
 # [START main_page]
 class MainPage(Handler):
     def get(self):
@@ -155,20 +128,13 @@ class MainPage(Handler):
             url_linktext = 'Login'
             u = None
 
-        self.render('index.html')
-        self.render('header.html', user=u, url_linktext=url_linktext, url=url)
-        self.render('content.html', user=u, audits=audits, url=url)
-
         upload_url = blobstore.create_upload_url('/upload')
 
-        html_string = """
-         <form action="%s" method="POST" enctype="multipart/form-data">
-        Upload File:
-        <input type="file" name="file"> <br>
-        <input type="submit" name="submit" value="Submit">
-        </form>""" % upload_url
+        self.render('index.html')
+        self.render('header.html', user=u, url_linktext=url_linktext, url=url)
+        self.render('content.html', user=u, audits=audits, url=url,
+            upload_url=upload_url)
 
-        self.response.write(html_string)
 
 # [END main_page]
 
@@ -288,7 +254,6 @@ class Logout(Handler):
 # [START app]
 app = webapp2.WSGIApplication([
     ('/', MainPage),
-    ('/sign', Guestbook),
     ('/signup', Signup),
     ('/login', Login),
     ('/logout', Logout),

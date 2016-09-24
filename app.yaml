@@ -14,6 +14,15 @@ handlers:
 - url: /css
   static_dir: css
 
+- url: /js
+  static_dir: js
+
+- url: /images
+  static_dir: images
+
+- url: /bootstrap/fonts
+  static_dir: fonts
+
 - url: /.*
   script: main.app
 # [END handlers]
