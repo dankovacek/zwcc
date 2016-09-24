@@ -1,23 +1,56 @@
 {% extends "index.html" %}
 {% block header %}
 <div class="navbar navbar-inverse navbar-fixed-top">
-  <div class="navbar-inner">
-    <div class="container">
-      <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="brand" href="#">Zero Waste Leaders - {{ guestbook_name }}</a>
-      <div class="nav-collapse collapse pull-right">
-        <!--<a href="{{ url|safe }}" class="btn">{{ url_linktext }}</a>-->
-        {% if user %}
-          <a href="/logout" class="btn">Logout</a>
-        {% else %}
-          <a href="/login" class="btn">Login</a>
-        {% endif %}
+  <header>
+    <div class="navbar-inner">
+      <div class="container">
+        <!--<button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>-->
+        <div class="row">
+          <div class="header-zwcc col-xs-6 col-lg-8 text-left">
+            <div class="col-xs-6">
+              <a href="#">Zero Waste Leaders</a>
+            </div>
+            <div class="col-xs-6">
+              {% if user %}
+              <a href="#"><em>{{ user.team }}<em></a>
+              {% else %}
+              <a href="#"> <em>- Leaderboard </em></a>
+              {% endif %}
+            </div>
+          </div>
+
+          <div class="header-tools col-xs-6 col-lg-4 text-right">
+            <!--<a href="{{ url|safe }}" class="btn">{{ url_linktext }}</a>-->
+            {% if user %}
+            <div class="add-audit col-xs-3">
+              <a href="#"><span class="glyphicon glyphicon-plus"></span></a>
+            </div>
+            <div class="team-img col-xs-3">
+              <img src="{{ user.team_img }}" class="img-responsive">
+            </div>
+            <div class="col-xs-3">
+              <a href="/{{ url }}" class="btn">{{ url_linktext }}</a>
+            </div>
+            <div class="team-img col-xs-3">
+              <span class="glyphicon glyphicon-menu-hamburger"></span>
+            </div>
+            {% else %}
+            <div class="col-xs-12">
+              <a href="/login" class="btn">Login</a>
+              <a class="btn">or</a>
+              <a href="/signup" class="btn">Signup</a>
+            </div>
+            {% endif %}
+          </div>
+
+        </div>
       </div>
     </div>
-  </div>
+  </header>
 </div>
+
 {% endblock %}

@@ -1,8 +1,51 @@
 {% extends "index.html" %}
 {% block content %}
 <div class="container">
+
+  <div class="row">
+    <div class="dash-main-content col-xs-12 text-center">
+      <img src="http://placehold.it/700x400" class="img-responsive"
+      style="margin:0 auto 0 auto">
+    </div>
+  </div>
+  <div class="row">
+    <div class="dash-sub-content col-xs-3">
+      <img src="http://placehold.it/180x180" class="img-responsive">
+    </div>
+    <div class="dash-sub-content col-xs-3">
+      <img src="http://placehold.it/180x180" class="img-responsive">
+    </div>
+    <div class="dash-sub-content col-xs-3">
+      <img src="http://placehold.it/180x180" class="img-responsive">
+    </div>
+    <div class="dash-sub-content col-xs-3">
+      <img src="http://placehold.it/180x180" class="img-responsive">
+    </div>
+  </div>
+
+  <!-- Start Individual Audit Table -->
+  <div class="row">
+    <div class="col-xs-2 col-sm-2">
+      <p class="audit-table-heading">Column 1</p>
+    </div>
+    <div class="col-xs-2">
+      <p class="audit-table-heading">Column 2</p>
+    </div>
+    <div class="col-xs-2">
+      <p class="audit-table-heading">Column 3</p>
+    </div>
+    <div class="col-xs-2">
+      <p class="audit-table-heading">Column 4</p>
+    </div>
+    <div class="col-xs-2">
+      <p class="audit-table-heading">Column 5</p>
+    </div>
+    <div class="col-xs-2">
+      <p class="audit-table-heading">Column 6</p>
+    </div>
+  </div>
   <!-- [START greetings] -->
-  {% for greeting in greetings %}
+  <!--{% for greeting in greetings %}
   <div class="row">
     {% if greeting.author %}
       <b>{{ greeting.author.email }}
@@ -15,21 +58,23 @@
     {% endif %}
     <blockquote>{{ greeting.content }}</blockquote>
   </div>
-  {% endfor %}
+  {% endfor %}-->
   <!-- [END greetings] -->
 
-  <form action="/sign?guestbook_name={{ guestbook_name }}" method="post">
+
+<!--
+  <form action="/sign?team_name={{ team_name }}" method="post">
     <div><textarea name="content" class="input-block-level" rows="3"></textarea></div>
-    <div><input type="submit" class="btn btn-large btn-primary" value="Sign Guestbook"></div>
+    <div><input type="submit" class="btn btn-large btn-primary" value="Save"></div>
   </form>
 
   <hr>
 
-  <form>Guestbook name:
-    <input value="{{ guestbook_name }}" name="guestbook_name">
-    <input type="submit" value="switch">
-  </form>
+  <form>Audit Form:
 
-  <a href="{{ url|safe }}">{{ url_linktext }}</a>
+    <input type="submit" value="switch">
+  </form>-->
+
+  <!--<a href="{{ url|safe }}">{{ url_linktext }}</a>-->
 </div>
 {% endblock %}

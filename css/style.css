@@ -10,15 +10,59 @@ blockquote {
 form {
   margin-top: 10px;
 }
-.form-signin input[type="text"] {
-  font-size: 16px;
-  height: auto;
-  margin-bottom: 15px;
-  padding: 7px 9px;
+
+.header-zwcc {
+  font-size: 1.25em;
+  margin: 1em 0 0 0;
 }
-.row {
-  margin-left: 0px;
-  margin-top: 10px;
-  overflow: scroll;
+
+.add-audit {
+
 }
+
+.dash-main-content {
+  margin-top: 1em;
+}
+
+.dash-sub-content {
+  padding: 0.5em;
+}
+
+.dash-main-content img {
+  margin: 0 auto 0 auto;
+}
+
+.team-img {
+
+}
+
+.logo-header {
+    width: 50vw;
+    padding: 0;
+}
+
+.header-tools {
+    font-size: 1.25em;
+    margin:0.75em 0 0 0;
+}
+
+.login-main {
+    width: 90vw;
+    margin: 0 auto 0 auto;
+}
+
+.login-form {
+    width: 50vw;
+    margin: 1em auto;
+    text-align:left;
+    padding: 0 2em 1.25em 2em;
+    background-color: #d6e9f8;
+    border: 0;
+}
+
+.user-photo {
+    width: 100%;
+    padding: 0.25em;
+}
+
 

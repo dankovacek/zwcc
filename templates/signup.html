@@ -13,21 +13,33 @@
   <body>
   {% block header %}
   {% endblock %}
-    <form method="post" action="/{{ login_out }}" style="text-align:center; font: 13px sans-serif">
+    <form method="post" action="/signup">
       <div class='login-form'>
-        <h3>Not logged in</h3>
+        <h3>New Account Signup</h3>
+          <label for="username">Name:</label>
+          <input name="username" type="text" value="{{ email }}" id="email">
+          <br>{{ uname_error }}
+
           <label for="email">Email:</label>
           <input name="email" type="email" value="{{ email }}" id="email">
           <br>{{ email_error }}
 
-          <label for="password">Password:</label>
-          <input name="password" type="password">
-          <br>{{ password_error }}
+          <label for="team">Organization Name:</label>
+          <input name="team" type="text" value="{{ team }}" id="team">
+          <br>{{ team_error }}
 
           <input name="admin" type="checkbox" value="True" id="admin">
-            <label for="admin">Sign in as Administrator</label><br>
+            <label for="admin">Register as Administrator</label><br>
 
-          <input name="action" value="Login" type="submit" class="btn"><br>
+          <h4>or</h4>
+
+          <label for="teams">Register under Existing Team</label><br>
+            <select name="teams" id="teams">
+              <option value="Team 1"> Team 1</option>
+              <option value="Team 2"> Team 2</option>
+              <option value="Team 3"> Team 3</option>
+
+          <input name="action" value="Register" type="submit" class="btn">
       </div>
     <!--<input name="continue" type="hidden" value="http://localhost:8080/">-->
     </form>
