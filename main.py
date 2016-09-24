@@ -131,9 +131,10 @@ class MainPage(Handler):
         upload_url = blobstore.create_upload_url('/upload')
 
         self.render('index.html')
-        self.render('header.html', user=u, url_linktext=url_linktext, url=url)
-        self.render('content.html', user=u, audits=audits, url=url,
-            upload_url=upload_url)
+        #self.render('header.html', user=u, url_linktext=url_linktext, url=url)
+        #self.render('content.html', user=u, audits=audits, url=url,
+        #    upload_url=upload_url)
+
 
 
 # [END main_page]
