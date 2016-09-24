@@ -103,8 +103,6 @@ class MainPage(Handler):
     def get(self):
         user_email = self.session.get('email')
 
-        print '#######user email = %s' % user_email
-
         # guestbook_name = self.request.get('guestbook_name',
         #                                   DEFAULT_GUESTBOOK_NAME)
         # audits_query = Audit.query(
@@ -121,7 +119,7 @@ class MainPage(Handler):
             url_linktext = 'Logout'
 
             #retrieve the User object from database
-            u = User.by_email(user_email)
+            u = User.by_email(user_email).get()
         else:
             #url = users.create_login_url(self.request.uri)
             url = '/login'
@@ -129,6 +127,7 @@ class MainPage(Handler):
             u = None
 
         upload_url = blobstore.create_upload_url('/upload')
+        print '#######user email = %s' % u
 
         self.render('index.html')
         self.render('header.html', user=u, url_linktext=url_linktext, url=url)
