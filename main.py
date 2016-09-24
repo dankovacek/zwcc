@@ -119,7 +119,7 @@ class MainPage(Handler):
             url_linktext = 'Logout'
 
             #retrieve the User object from database
-            u = User.by_email(user_email).get()
+            u = User.by_email(user_email)
         else:
             #url = users.create_login_url(self.request.uri)
             url = '/login'

@@ -10,7 +10,7 @@ class User(ndb.Model):
     password = ndb.StringProperty(required=True)
     date = ndb.DateTimeProperty(auto_now_add=True)
     #TODO: link Team to User
-    team_img = ndb.StringProperty(required=True)
+    team_img = ndb.StringProperty(required=False)
 
     @classmethod
     def by_name(cls, name):
