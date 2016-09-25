@@ -275,6 +275,11 @@ class Challenges(Handler):
         self.render('challenges.html', user='')
         return
 
+class Data(Handler):
+    def get(self):
+        self.render('data.html', user='')
+        return
+
 # [START app]
 app = webapp2.WSGIApplication([
     ('/', MainPage),
@@ -282,6 +287,7 @@ app = webapp2.WSGIApplication([
     ('/login', Login),
     ('/logout', Logout),
     ('/upload', data.UploadHandler),
-    ('/challenges', Challenges)
+    ('/challenges', Challenges),
+    ('/data', Data)
 ], debug=True, config=config)
 # [END app]

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+    <!-- [START css] -->
+    <link type="text/css" rel="stylesheet" href="/bootstrap/css/bootstrap.css">
+    <link type="text/css" rel="stylesheet" href="/bootstrap/css/bootstrap-responsive.css">
+    <link type="text/css" rel="stylesheet" href="/css/style.css">
+    <link type="text/css" rel="stylesheet" href="/css/sidebar-style.css">
+    
+    <!-- [END css] -->
+    <!-- [START head js] -->
+
+    <script src="/js/jquery-3.1.0.js"></script>
+    <script src="//d3js.org/d3.v3.min.js"></script>
+    
+    <!-- [Start Sliding Sidebar Menu Script] -->
+    <script src="js/scripts.js"></script>
+    <!-- [END head js] -->
+  </head>
+  <body>
+  <div style="container">
+
+    {% include 'header.html' %}
+    <div class="container">
+
+    <h1>Contribute Data</h1>
+    <div class="row">
+      <div class="dash-main-content col-xs-4 text-center">
+        <div class="data-option">
+          <img class="img-responsive" src="/images/upload.png">
+        </div>
+      </div>
+      <div class="dash-main-content col-xs-4 text-center">
+        <div class="data-option">
+          <img class="img-responsive" src="/images/upload.png">
+        </div>
+      </div>
+      <div class="dash-main-content col-xs-4 text-center">
+        <div class="data-option">
+          <img class="img-responsive" src="/images/upload.png">
+        </div>
+      </div>
+    </div>
+    </div>
+</div>
+  </div>
+    <!-- [START footer js] -->
+    <script src="js/bootstrap.min.js" async defer></script>
+    <script>
+      $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+      });
+    </script>
+    <!-- [END footer js] -->
+
+  </body>
+</html>
