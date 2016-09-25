@@ -37,6 +37,8 @@
   </div>
   <!-- [Start Modal] -->
   <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <!--<div class="loading-status hide-oscar">Loading</div>-->
+  <div class="oscar-the-loader hide-oscar"></div>
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -48,8 +50,8 @@
             <form action="{{ upload_url }}" method="POST" enctype="multipart/form-data">
                 Upload File:
                 <input type="file" name="file" class="btn btn-primary"> <br>
-                <input type="submit" name="submit" value="Submit" class="btn btn-primary">
             </form>
+            <div id="data-submitter" class="btn btn-primary">Submit</div>
           </div>
         </div>
         <div class="modal-footer">

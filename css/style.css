@@ -18,7 +18,7 @@ h1{
   font-size:20px;
 }
 h3{
-  font-size:16px;  
+  font-size:16px;
 }
 
 a.selected-city, a.selected-impact{
@@ -50,6 +50,28 @@ a, a:hover{
 .navbar-inverse {
     background-color: #1d8a4b;
     border-color: #080808;
+}
+
+.oscar-the-loader {
+  background-image: url('/images/grouchypants.png');
+  z-index: 1051;
+  height:50vh;
+  width:35vw;
+  margin: 0 auto 0 auto;
+  position: relative;
+  top:100vh;
+}
+
+.loading-status {
+  z-index: 1051;
+  width: 100vw;
+  font-size: 5em;
+ /* position: fixed; */
+  top: 10vh;
+}
+
+.hide-oscar {
+  display:none;
 }
 
 .dash-sub-content {

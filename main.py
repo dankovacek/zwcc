@@ -118,12 +118,9 @@ class MainPage(Handler):
 
         upload_url = blobstore.create_upload_url('/upload')
 
-
         self.render('index.html', user=u, upload_url=upload_url)
 
-
 # [END main_page]
-
 
 # [START spreadsheet_import]
 
@@ -174,9 +171,13 @@ class Signup(Handler):
         password = self.request.get('password')
         new_org_name = self.request.get("org_name")
 
+
         org_type = self.request.get("org_type")
 
         selected_existing_team = self.request.get("teams")
+
+        print '#####  new_org_name = %s' % new_org_name
+        print '#####  existing_team = %s' % selected_existing_team
 
         #team_img = self.request.get("team_image")
         email_error, team_error, uname_error, pwd_error = '','','',''
@@ -187,9 +188,6 @@ class Signup(Handler):
 
         if not email:
             email_error = "Please use a valid email."
-
-        if not (new_org_name and selected_existing_team):
-            team_error = "Please put a valid team name."
 
         if not username:
             uname_error = "Please enter a username."
@@ -204,13 +202,12 @@ class Signup(Handler):
         if not re.match(r'[A-Za-z0-9@#$%^&+=]{8,}', password):
             pwd_error = "Please enter an alphanumeric password >= 8 characters long."
 
-        if (email_error or team_error or uname_error or pwd_error):
+        if (email_error or uname_error or pwd_error):
             self.render("signup.html", username=username, email=email,
-                team=new_org_name, uname_error=uname_error,
-                team_error=team_error, email_error=email_error,
+                team=new_org_name, uname_error=uname_error, email_error=email_error,
                 pwd_error=pwd_error, teams=t, org_type=org_type)
         else:
-            #check if team exists
+            #check if team exists: if there's something in
             #join user to existing team
             if new_org_name:
                 create_new_team(username, new_org_name, org_type)
@@ -222,13 +219,10 @@ class Signup(Handler):
                 members += [username]
                 #update team members
                 team.members.put()
-                create_user(username, email, password, members, selected_existing_team, self.session)
+                create_user(username, email, password, selected_existing_team, self.session)
 
-            user = User.by_name(username)
-            self.render('index.html', user=user, teams=t)
+            self.session['email'] = email
             self.redirect('/')
-
-
 
 def create_user(name, email, password, team_name, session_obj):
     u = User.by_email(email)
