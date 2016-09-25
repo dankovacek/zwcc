@@ -1,4 +1,9 @@
 #ENV.IO - Environmental Data to Power Social Change
+
+Our goal, by making environmental related data available and highly visible, is to inspire cities, companies and individuals to find innovative solutions to tackle the most impactful environmental challenges we face.
+
+While the Env.io platform will include all environmental impacts, we will first focus on Waste.
+
 ## Zero Waste City Challenge #ZWCC
 
 Building on the City of Vancouver's [Zero Waste 2040 goal](http://vancouver.ca/green-vancouver/zero-waste.aspx),
@@ -32,3 +37,5 @@ With a flexible scale of comparing performance, with special sensitivity to priv
 Zero Waste Challenge is a way for municipalities to publicly challenge other municipalities to take on
 similar conservation-minded goals. ZWCC provides the interface for municipalities and private corporations
 to measure-up against one-another.
+
+While ENV.IO digitizes, demonetizes and democratizes the data and visualizations to enable net zero environmental impact.
