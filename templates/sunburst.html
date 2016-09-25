@@ -1,0 +1,22 @@
+{% block sunburst %}
+<div class="dash-main-content col-xs-5 text-center">
+     <div id="sunburst-main">
+      <div id="sequence"></div>
+      <div id="sunburst-chart">
+        <div id="explanation" style="visibility: hidden;">
+          <span id="percentage"></span><br/>
+          of waste stream
+        </div>
+      </div>
+    </div>
+    <!--
+    <div id="sunburst-sidebar">
+      <input type="checkbox" id="togglelegend"> Legend<br/>
+      <div id="legend" style="visibility: hidden;"></div>
+    </div>
+    -->
+</div>
+	
+<script type="text/javascript" src="/js/sunburst_sequences.js"></script>
+
+{% endblock %}

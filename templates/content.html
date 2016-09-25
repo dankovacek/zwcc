@@ -3,42 +3,7 @@
 
   <div class="row">
     {% include 'map.html' %}
-  </div>
-  <div class="row">
-    <div class="dash-sub-content col-xs-3">
-      <img src="http://placehold.it/180x180" class="img-responsive">
-    </div>
-    <div class="dash-sub-content col-xs-3">
-      <img src="http://placehold.it/180x180" class="img-responsive">
-    </div>
-    <div class="dash-sub-content col-xs-3">
-      <img src="http://placehold.it/180x180" class="img-responsive">
-    </div>
-    <div class="dash-sub-content col-xs-3">
-      <img src="http://placehold.it/180x180" class="img-responsive">
-    </div>
-  </div>
-
-  <!-- Start Individual Audit Table -->
-  <div class="row">
-    <div class="col-xs-2 col-sm-2">
-      <p class="audit-table-heading">Column 1</p>
-    </div>
-    <div class="col-xs-2">
-      <p class="audit-table-heading">Column 2</p>
-    </div>
-    <div class="col-xs-2">
-      <p class="audit-table-heading">Column 3</p>
-    </div>
-    <div class="col-xs-2">
-      <p class="audit-table-heading">Column 4</p>
-    </div>
-    <div class="col-xs-2">
-      <p class="audit-table-heading">Column 5</p>
-    </div>
-    <div class="col-xs-2">
-      <p class="audit-table-heading">Column 6</p>
-    </div>
+    {% include 'sunburst.html' %}
   </div>
 
   <div class="data-upload">
@@ -48,22 +13,6 @@
         <input type="submit" name="submit" value="Submit">
     </form>
   </div>
-  <!-- [START greetings] -->
-  <!--{% for greeting in greetings %}
-  <div class="row">
-    {% if greeting.author %}
-      <b>{{ greeting.author.email }}
-        {% if user and user.user_id() == greeting.author.identity %}
-          (You)
-        {% endif %}
-      </b> wrote:
-    {% else %}
-      An anonymous person wrote:
-    {% endif %}
-    <blockquote>{{ greeting.content }}</blockquote>
-  </div>
-  {% endfor %}-->
-  <!-- [END greetings] -->
 
 
 <!--

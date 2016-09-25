@@ -1,43 +1,28 @@
 {% block map %}
-<div class="dash-main-content col-xs-12 text-center">
+<div class="dash-main-content col-xs-7 text-center">
      <div id="map"></div>
      <div id='area-legend' class='legend'>
-	    <h4>annual tonnes per<br>capita</h4>
-	    <div><span style='background-color: #723122'></span>0.8</div>
-	    <div><span style='background-color: #8B4225'></span>0.7</div>
-	    <div><span style='background-color: #A25626'></span>0.6</div>
-	    <div><span style='background-color: #B86B25'></span>0.5</div>
-	    <div><span style='background-color: #CA8323'></span>0.4</div>
-	    <div><span style='background-color: #DA9C20'></span>0.3</div>
-	    <div><span style='background-color: #E6B71E'></span>0.2</div>
-	    <div><span style='background-color: #EED322'></span>0.1</div>
-	    <div><span style='background-color: #F2F12D'></span>0</div>
+	    <h4>annual tonnes<br>per capita</h4>
+	    <div><span style='background-color: #67000d'></span>0.8</div>
+	    <div><span style='background-color: #a50f15'></span>0.7</div>
+	    <div><span style='background-color: #cb181d'></span>0.6</div>
+	    <div><span style='background-color: #ef3b2c'></span>0.5</div>
+	    <div><span style='background-color: #fb6a4a'></span>0.4</div>
+	    <div><span style='background-color: #fc9272'></span>0.3</div>
+	    <div><span style='background-color: #fcbba1'></span>0.2</div>
+	    <div><span style='background-color: #fee0d2'></span>0.1</div>
+	    <div><span style='background-color: #fff5f0'></span>0.0</div>
 	</div>
-
 </div>
 <script type="text/javascript">
-/*
-	var mymap = L.map('map').setView([49.2527, -123.1207], 12);
 
-	L.tileLayer('https://api.mapbox.com/styles/v1/ggfitzg/cithmwzq5001p2ipktlihddu8/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZ2dmaXR6ZyIsImEiOiJjaXRobThsY3QwMjd1MnlvM2dxZ2pmaTZtIn0.n4RmIQ1KVIJF3p8qqWKL4A', {
-	    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
-	    maxZoom: 18,
-	}).addTo(mymap);
-
-	var layer = L.mapbox.tileLayer('ggfitzg.a016pdph');
-
-
-	var geojsonLayer = new L.GeoJSON.AJAX("/data/cov_localareas.geojson");       
-	geojsonLayer.addTo(mymap);
-*/
 	mapboxgl.accessToken = 'pk.eyJ1IjoiZ2dmaXR6ZyIsImEiOiJjaXRobThsY3QwMjd1MnlvM2dxZ2pmaTZtIn0.n4RmIQ1KVIJF3p8qqWKL4A';
 
 	var map = new mapboxgl.Map({
 	    container: 'map',
 	    style: 'mapbox://styles/ggfitzg/cithqq1u9002e2jplddtrzmnb',
-	    //style: 'mapbox://styles/ggfitzg/cithmwzq5001p2ipktlihddu8',
 	    center: [-123.120,49.248], // starting position
-	    zoom: 11 // starting zoom
+	    zoom: 10.9 // starting zoom
 	});
 
 
@@ -58,15 +43,15 @@
             'fill-color': {
                 property: 'wpc',
                 stops: [
-                    [0, '#F2F12D'],
-                    [0.1, '#EED322'],
-                    [0.2, '#E6B71E'],
-                    [0.3, '#DA9C20'],
-                    [0.4, '#CA8323'],
-                    [0.5, '#B86B25'],
-                    [0.6, '#A25626'],
-                    [0.7, '#8B4225'],
-                    [0.8, '#723122']
+                	[0, '#fff5f0'],
+                    [0.1, '#fee0d2'],
+                    [0.2, '#fcbba1'],
+                    [0.3, '#fc9272'],
+                    [0.4, '#fb6a4a'],
+                    [0.5, '#ef3b2c'],
+                    [0.6, '#cb181d'],
+                    [0.7, '#a50f15'],
+                    [0.8, '#67000d']
                 ]
             },
             'fill-opacity': 0.75,

@@ -27,6 +27,7 @@ class User(ndb.Model):
         u = User.gql("WHERE email = :email", email = email)
         result = u.get()
         return u
+
 # [START audit]
 class Audit(ndb.Model):
     """A main model for representing an individual Guestbook entry."""
