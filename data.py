@@ -23,10 +23,41 @@ from google.appengine.ext import ndb
 from models import Audit
 
 # [START waste_item]
-class UploadPlaceholder(ndb.Model):
+class WasteItem(ndb.Model):
+    id = ndb.IntegerProperty()
     date = ndb.DateProperty()
-    data = ndb.StringProperty()
-    value = ndb.IntegerProperty()
+    '''
+    These are the current column names in the upload template - can turn them into properties of the model
+
+    Line
+    Date
+    Inspection Type
+    Lead Appraiser
+    Country
+    Province
+    Regional District
+    City/Town
+    Neighbourhood
+    Street Number
+    Street Name
+    Apt. # (if applicable)
+    Postal Code
+    Building Type
+    Building Subtype
+    # of Inhabitants/Personnel
+    Primary Material
+    Secondary Material
+    Tertiary/Quaternary 
+    Disposal Method
+    Waste kg 
+    Recycled kg 
+    Reused kg 
+    Total kg 
+    kg/inhabitant 
+    Additional Comments 
+    '''
+
+
 # [END waste_item]
 
 
@@ -44,11 +75,14 @@ def process_spreadsheet(blob_info):
     blob_reader = blobstore.BlobReader(blob_info.key())
     #reader = csv.reader(blob_reader, delimiter=';')
     wb = xlrd.open_workbook(file_contents=blob_reader.read())
-    sh = wb.sheet_by_index(0)
-    for rownum in range(1,sh.nrows):
+    sh = wb.sheet_by_index(0) #get the first worksheet in the workbook
+    # the headers are currently on line 8 of the spreadsheet, fyi.
+    for rownum in range(8,sh.nrows):
     #for row in reader:
+    #need to map all of the columns here - it is done by index of the column per ordering above
+    #see the 'UploadPlaceholder as a simpler example, also included some code for getting data value from a spreadsheet
         date, data, value = sh.row_values(rownum)
-        entry = UploadPlaceholder(date=datetime.date(1900, 1, 1) + datetime.timedelta(int(date)-2), data=data, value=int(value))
+        entry = WasteItem(date=datetime.date(1900, 1, 1) + datetime.timedelta(int(date)-2), data=data, value=int(value))
         entry.put()
 
 # [END spreadsheet_import]

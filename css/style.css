@@ -11,7 +11,7 @@ form {
   margin-top: 10px;
 }
 
-h1,h2,h3{
+h1,h2,h3,p{
   color:#d8d3d3;
 }
 h1{
@@ -92,7 +92,7 @@ a, a:hover{
   -moz-box-shadow: none;
   -moz-transition: none;
   -webkit-transition: none;
-  padding: 0.25em;
+  padding: 0.3em;
 }
 
 .glyph-check {
@@ -127,11 +127,12 @@ a, a:hover{
 .login-form {
     width: 50vw;
     margin: 10vh auto 0 auto;
-    font-size: 1.5em;
-    color: #337ab7;
+    font-size: 13px;
+    color: #1d8a4b;
     text-align:left;
     padding: 0.5em 2em 1.25em 2em;
-    background-color: #222;
+    /*background-color: #222;*/
+    background-color:#484848;
     border: 0;
     border-radius: 1em;
 }
@@ -148,7 +149,7 @@ a, a:hover{
 
 .modal-content {
   background-color: #000;
-  color: #204d73;
+  color: #4cadff;
 }
 
 .modal-header {
@@ -191,3 +192,37 @@ button.close {
     background-color: #fff;
 }
 
+.data-option{
+  width: 150px;
+  height: 150px;
+  border-radius: 10px;
+  font-size: 50px;
+  color: #000;
+  line-height: 500px;
+  text-align: center;
+  background: #fff;
+  margin:30px auto;
+
+}
+.data-option img{
+    width: 100px;
+    margin-top: 15px;
+    padding-top: 25px;
+}
+.option-desc{
+  margin-top:20px;
+  padding:0 30px;
+}
+a.option-link:hover .data-option{
+  -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+  -webkit-box-shadow: 0px 0px 80px 0px #3498db;
+  -moz-box-shadow:    0px 0px 80px 0px #3498db;
+  box-shadow:         0px 0px 80px 0px #3498db;
+}
+a.return{
+  margin-top:30px;
+  font-size:18px;
+  padding:10px;
+}
