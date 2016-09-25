@@ -20,8 +20,9 @@ $("#data-submitter").click(function() {
     //     "transform": "translate(0px,100px)",
     //     "transition": "transform 500ms"
     // });
-    $( "#oscar-the-loader" ).animate({ "top": "-=200px" }, 4000, function() {
+    $( "#oscar-the-loader" ).animate({ "top": "-=200px" }, 3000, function() {
         $("#oscar-the-loader").delay( 2000 ).fadeOut( "fast", function() {
+            $( ".data-upload-status" ).toggleClass( "hide-oscar" );
 
         });
 

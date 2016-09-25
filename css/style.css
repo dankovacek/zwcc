@@ -62,7 +62,7 @@ a, a:hover{
   left: 30vw;
 }
 
-.loading-status {
+.data-upload-status {
   z-index: 1051;
   width: 100vw;
   font-size: 5em;
