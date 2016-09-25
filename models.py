@@ -10,7 +10,7 @@ class User(ndb.Model):
     password = ndb.StringProperty(required=True)
     date = ndb.DateTimeProperty(auto_now_add=True)
     #TODO: link Team to User
-    team_img = ndb.StringProperty(required=True)
+    team_img = ndb.StringProperty(required=False)
 
     @classmethod
     def by_name(cls, name):
@@ -18,7 +18,7 @@ class User(ndb.Model):
         #u = User.all().filter('name =', name).get()
         u = User.gql("WHERE name = :name", name = name)
         result = u.get()
-        return u
+        return result
 
     @classmethod
     def by_email(cls, email):
@@ -26,7 +26,7 @@ class User(ndb.Model):
         #u = User.all().filter('email =', email).get()
         u = User.gql("WHERE email = :email", email = email)
         result = u.get()
-        return u
+        return result
 
 # [START audit]
 class Audit(ndb.Model):
