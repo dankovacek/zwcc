@@ -63,11 +63,7 @@ a, a:hover{
 }
 
 .data-upload-status {
-  z-index: 1051;
-  width: 100vw;
-  font-size: 5em;
- /* position: fixed; */
-  top: 10vh;
+  font-size: 3.5em;
 }
 
 .hide-oscar {
