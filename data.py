@@ -39,6 +39,7 @@ class WasteItem(ndb.Model):
     ApartmentNumer = ndb.IntegerProperty()
     PostalCode = ndb.StringProperty()
     BuildingType = ndb.StringProperty()
+    BuildingSubType = ndb.StringProperty()
     NumberInhabitants = ndb.IntegerProperty()
     PrimaryMaterial = ndb.StringProperty() # TODO read this as csv list
     SecondaryMaterial = ndb.StringProperty() # TODO read this as csv list
@@ -95,6 +96,24 @@ class UploadHandler(blobstore_handlers.BlobstoreUploadHandler):
         blobstore.delete(blob_info.key())  # optional: delete file after import
         self.redirect("/")
 
+def int_wrap(aStringLiteral):
+    if not aStringLiteral:
+        return 0
+    else:
+        return int(aStringLiteral)
+    
+def float_wrap(aStringLiteral):
+    if not aStringLiteral:
+        return 0
+    else:
+        return float(aStringLiteral)
+
+def string_wrap(aStringLiteral):
+    if not aStringLiteral:
+        return "NoData"
+    else:
+        return unicode(aStringLiteral)
+    
 def process_spreadsheet(blob_info):
     blob_reader = blobstore.BlobReader(blob_info.key())
     #reader = csv.reader(blob_reader, delimiter=';')
@@ -107,36 +126,36 @@ def process_spreadsheet(blob_info):
     #need to map all of the columns here - it is done by index of the column per ordering above
     #see the 'UploadPlaceholder as a simpler example, also included some code for getting data value from a spreadsheet
         #date, data, value = sh.row_values(rownum)
-        #entry = WasteItem(date=datetime.date(1900, 1, 1) + datetime.timedelta(int(date)-2), data=data, value=int(value))
+        #entry = WasteItem(date=datetime.date(1900, 1, 1) + datetime.timedelta(int(date)-2), data=data, value=int_wrap(value))
         #entry.put()
         # Columns A-Z
         #for colnum in range(0,25):
-        line = int(sh.cell_value(rownum,0))
+        line = int_wrap(sh.cell_value(rownum,0))
         date = (xlrd.xldate.xldate_as_datetime(sh.cell_value(rownum,1),wb.datemode)).date()
-        ins_type = str(sh.cell_value(rownum,2))
-        appraiser = str(sh.cell_value(rownum,3))
-        ctry = str(sh.cell_value(rownum,4))
-        prov = str(sh.cell_value(rownum,5))
-        reg_dist = str(sh.cell_value(rownum,6))
-        city = str(sh.cell_value(rownum,7))
-        nebhood = str(sh.cell_value(rownum,8))
-        str_num = int(sh.cell_value(rownum,9))
-        str_nam = str(sh.cell_value(rownum,10))
-        apt_num = int(sh.cell_value(rownum,11))
-        poc_code = str(sh.cell_value(rownum,12))
-        bld_type = str(sh.cell_value(rownum,13))
-        sbd_type = str(sh.cell_value(rownum,14))
-        numb_inh = int(sh.cell_value(rownum,15))
-        prim_mat = str(sh.cell_value(rownum,16))
-        seco_mat = str(sh.cell_value(rownum,17))
-        terq_mat = str(sh.cell_value(rownum,18))
-        disp_mth = str(sh.cell_value(rownum,19))
-        waste_kg = float(sh.cell_value(rownum,20))
-        rcycd_kg = float(sh.cell_value(rownum,21))
-        rused_kg = float(sh.cell_value(rownum,22))
-        total_kg = float(sh.cell_value(rownum,23))
-        kg_inhab = float(sh.cell_value(rownum,24))
-        add_commnts = str(sh.cell_value(rownum,25))
+        ins_type = string_wrap(sh.cell_value(rownum,2))
+        appraiser = string_wrap(sh.cell_value(rownum,3))
+        ctry = string_wrap(sh.cell_value(rownum,4))
+        prov = string_wrap(sh.cell_value(rownum,5))
+        reg_dist = string_wrap(sh.cell_value(rownum,6))
+        city = string_wrap(sh.cell_value(rownum,7))
+        nebhood = string_wrap(sh.cell_value(rownum,8))
+        str_num = int_wrap(sh.cell_value(rownum,9))
+        str_nam = string_wrap(sh.cell_value(rownum,10))
+        apt_num = int_wrap(sh.cell_value(rownum,11))
+        poc_code = string_wrap(sh.cell_value(rownum,12))
+        bld_type = string_wrap(sh.cell_value(rownum,13))
+        sbd_type = string_wrap(sh.cell_value(rownum,14))
+        numb_inh = int_wrap(sh.cell_value(rownum,15))
+        prim_mat = string_wrap(sh.cell_value(rownum,16))
+        seco_mat = string_wrap(sh.cell_value(rownum,17))
+        terq_mat = string_wrap(sh.cell_value(rownum,18))
+        disp_mth = string_wrap(sh.cell_value(rownum,19))
+        waste_kg = float_wrap(sh.cell_value(rownum,20))
+        rcycd_kg = float_wrap(sh.cell_value(rownum,21))
+        rused_kg = float_wrap(sh.cell_value(rownum,22))
+        total_kg = float_wrap(sh.cell_value(rownum,23))
+        kg_inhab = float_wrap(sh.cell_value(rownum,24))
+        add_commnts = string_wrap(sh.cell_value(rownum,25))
         
         entry = WasteItem(EntryLineNum = line,AppraisalDate = date,InspectionType = ins_type,LeadAppraiser = appraiser,Country = ctry,Province = prov,RegionalDistrict = reg_dist,City_Town = city,Neighbourhood = nebhood,StreetNumber = str_num,StreetName = str_nam,ApartmentNumer = apt_num,PostalCode = poc_code,BuildingType = bld_type,BuildingSubType = sbd_type,NumberInhabitants = numb_inh,PrimaryMaterial = prim_mat,SecondaryMaterial = seco_mat,TertQuatMaterial = terq_mat,DisposalMethod = disp_mth,WasteKg = waste_kg,RecycledKg = rcycd_kg,ReusedKg = rused_kg,TotalKg = total_kg,KgInhabitant = kg_inhab,AdditionalComments = add_commnts)
         entry.put()
