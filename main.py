@@ -245,16 +245,12 @@ class Logout(Handler):
 
 class Challenges(Handler):
     def get(self):
-        user = self.session['email']
-        u = User.by_email(user)
-        self.render('challenges.html', user=u)
+        self.render('challenges.html', user=User.by_email(self.session['email']))
         return
 
 class Data(Handler):
     def get(self):
-        user = self.session['email']
-        u = User.by_email(user)
-        self.render('data.html', user=u)
+        self.render('data.html', user=User.by_email(self.session['email']))
         return
 
 # [START app]
