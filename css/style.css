@@ -57,8 +57,8 @@ a, a:hover{
   z-index: 9999;
   position: fixed;
   width: 35vw;
-  height:50vh;
-  top:100vh;
+  height: 50vh;
+  top: 90vh;
   left: 30vw;
 }
 
