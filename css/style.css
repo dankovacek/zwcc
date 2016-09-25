@@ -1,7 +1,7 @@
 body {
   padding-top:60px;
   padding-bottom: 40px;
-  background-color: #f5f5f5;
+  background: rgba(0,0,0,0.8);
 }
 blockquote {
   margin-bottom: 10px;
@@ -11,19 +11,45 @@ form {
   margin-top: 10px;
 }
 
+h1,h2,h3{
+  color:#d8d3d3;
+}
+h1{
+  font-size:20px;
+}
+h3{
+  font-size:16px;  
+}
+
+a.selected-city, a.selected-impact{
+  color:#f39c12;
+}
+
 .header-zwcc {
   position: relative;
   left: -2vw;
   font-size: 1.25em;
-  margin: 1em 0 0 0;
+  margin: 5px 0;
 }
 
-.add-audit {
-
+.navbar-brand {
+    background: url(/images/envio.png) center / contain no-repeat;
+    width: 200px;
+    float: left;
+    height: 45px;
 }
 
-.dash-main-content {
-  margin-top: 7vh;
+.btn{
+  padding: 0px 10px;
+}
+
+a, a:hover{
+  color:#fff;
+}
+
+.navbar-inverse {
+    background-color: #1d8a4b;
+    border-color: #080808;
 }
 
 .dash-sub-content {
@@ -57,7 +83,7 @@ form {
 
 .header-tools {
     font-size: 1.25em;
-    margin:0.75em 0 0 0;
+    margin:14px 0 0 0;
 }
 
 .login-main {
@@ -103,5 +129,14 @@ form {
 .pwd_error {
   font-size: 1.25em;
   color: #fff;
+}
+
+.table-striped > thead > tr{
+    background-color: #f39c12;
+    color: #fff;
+}
+
+.table-striped > tbody > tr:nth-of-type(even) {
+    background-color: #fff;
 }
 

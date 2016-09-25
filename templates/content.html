@@ -2,12 +2,19 @@
 {% block content %}
 <div class="container">
 
+<div class="row">
+<div class="col-xs-12 text-center">
+<h1>Welcome to Env.io - Explore the state of <strong><a href="#" class="selected-impact">waste</a> in <strong><a href="#" class="selected-city">Vancouver</a><strong></h1>
+</div>
+</div>
+
   <div class="row">
     {% include 'map.html' %}
     {% include 'sunburst.html' %}
   </div>
 
   <div class="data-upload">
+    <h3>Upload your latest waste assessment</h3>
     <form action="{{ upload_url }}" method="POST" enctype="multipart/form-data">
         Upload File:
         <input type="file" name="file"> <br>

@@ -238,12 +238,18 @@ class Logout(Handler):
         self.redirect('/')
         return
 
+class Challenges(Handler):
+    def get(self):
+        self.render('challenges.html', user='')
+        return
+
 # [START app]
 app = webapp2.WSGIApplication([
     ('/', MainPage),
     ('/signup', Signup),
     ('/login', Login),
     ('/logout', Logout),
-    ('/upload', data.UploadHandler)
+    ('/upload', data.UploadHandler),
+    ('/challenges', Challenges)
 ], debug=True, config=config)
 # [END app]
