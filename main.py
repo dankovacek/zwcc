@@ -55,13 +55,6 @@ config['webapp2_extras.sessions'] = {
     'secret_key': 'some-secret-key',
 }
 
-# [END imports]
-# os.path.dirname(__file__)
-#jinja_env = jinja2.Environment(loader = jinja2.FileSystemLoader(template_dir),
-#    autoescape = True)
-
-#DEFAULT_GUESTBOOK_NAME = 'Team Name'
-
 # We set a parent key on the 'Audits' to ensure that they are all
 # in the same entity group. Queries across the single entity group
 # will be consistent. However, the write rate should be limited to
@@ -114,22 +107,18 @@ class MainPage(Handler):
         #TODO: query audit entities
         audits = ''
         if user_email:
-            #url = users.create_logout_url(self.request.uri)
-            url = '/logout'
-            url_linktext = 'Logout'
-
             #retrieve the User object from database
             u = User.by_email(user_email)
+            print '#######user email = %s' % u
+
         else:
             #url = users.create_login_url(self.request.uri)
-            url = '/login'
-            url_linktext = 'Login'
             u = None
 
         upload_url = blobstore.create_upload_url('/upload')
-        print '#######user email = %s' % u
 
-        self.render('index.html', user=u)
+
+        self.render('index.html', user=u, upload_url=upload_url)
 
 
 # [END main_page]
@@ -157,7 +146,6 @@ class MainPage(Handler):
 class Login(Handler):
     def get(self):
         self.render('login.html', user='', login_out='login')
-        self.render('header.html', team_name='')
 
     def post(self):
         email = self.request.get('email')
@@ -166,32 +154,34 @@ class Login(Handler):
 
         # if login isn't in DB, redirect to signup page
         user = User.by_email(email)
-        if not user:
+        if user is None:
             self.redirect('/signup')
+            return
 
         if not email:
             email_error = "Please use a valid e-mail address."
 
         #validate password
         #http://stackoverflow.com/questions/2990654/how-to-test-a-regex-password-in-python
-        if not re.match(r'[A-Za-z0-9@#$%^&+=]{8,}', password):
+        if not re.match(r'[A-Za-z0-9@#$%^&+=]{8,}', pwd):
             pwd_error1 = "Password must be alphanumeric and > 8 characters."
 
+        print '############   user passord = %s ' % user
         if user.password != pwd:
             pwd_error2 = "Incorrect password."
 
         if (email_error or password_error):
             self.render("login.html", email=email,
-                email_error=email_error, pwd_error1=password_error,
+                email_error=email_error, pwd_error1=pwd_error1,
                 pwd_error2=pwd_error2)
-            self.render('header.html', user='', url='', login_out='login')
+            self.render('header.html', user='')
         else:
             self.session['email'] = email
-            self.redirect("/")
+            self.render("index.html", user=user)
 
 class Signup(Handler):
     def get(self):
-        self.render('signup.html', user='', login_out='login')
+        self.render('signup.html', user='')
 
     def post(self):
         username = self.request.get('username')
@@ -228,7 +218,8 @@ class Signup(Handler):
             #create a new user
             self.session['email'] = email
             create_user(username, email, password, team, self.session)
-            self.redirect('/')
+            self.render('index.html', user=user)
+            return
 
 
 def create_user(name, email, password, team_name, session_obj):
@@ -245,6 +236,7 @@ class Logout(Handler):
     def get(self):
         self.session['email'] = None
         self.redirect('/')
+        return
 
 # [START app]
 app = webapp2.WSGIApplication([

@@ -1,20 +1,8 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
-    <!-- [START css] -->
-    <link type="text/css" rel="stylesheet" href="/bootstrap/css/bootstrap.css">
-    <link type="text/css" rel="stylesheet" href="/bootstrap/css/bootstrap-responsive.css">
-    <link type="text/css" rel="stylesheet" href="/css/style.css">
-    <!-- [END css] -->
-  </head>
-  <body>
+
   {% include "header.html" %}
     <form method="post">
       <div class='login-form'>
-        <h3>New Account Signup</h3>
+        <h3>Join the Challenge:</h3>
           <label for="username">Name:</label>
           <input name="username" type="text" value="{{ username }}" id="email">
           <p class="error-msg">{{ uname_error }}</p>

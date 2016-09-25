@@ -11,6 +11,8 @@ form {
 }
 
 .header-zwcc {
+  position: relative;
+  left: -2vw;
   font-size: 1.25em;
   margin: 1em 0 0 0;
 }
@@ -20,7 +22,7 @@ form {
 }
 
 .dash-main-content {
-  margin-top: 1em;
+  margin-top: 7vh;
 }
 
 .dash-sub-content {
@@ -62,6 +64,11 @@ form {
 .main-menu-button {
   font-size: 1.5em;
   color: #fff;
+}
+
+#menu-toggle {
+  position: relative;
+  right: -4vw;
 }
 
 .user-photo {

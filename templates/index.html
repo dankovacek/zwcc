@@ -15,16 +15,11 @@
     <!-- [START head js] -->
     <script src="js/jquery-3.1.0.js"></script>
     <script src="https://unpkg.com/leaflet@0.7.7/dist/leaflet.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
     <!-- [END head js] -->
     <!-- [Start Sliding Sidebar Menu Script] -->
     <!-- https://github.com/BlackrockDigital/startbootstrap-simple-sidebar/blob/master/index.html -->
-    <script>
-      $("#menu-toggle").click(function(e) {
-        e.preventDefault();
-        $("#wrapper").toggleClass("toggled");
-    });
-    </script>
+    <script src="js/scripts.js"></script>
     <!-- [Start Sliding Sidebar Menu Script] -->
   </head>
   <body>
@@ -35,6 +30,12 @@
   </div>
     <!-- [START footer js] -->
     <script src="js/bootstrap.min.js" async defer></script>
+    <script>
+      $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+      });
+      </script>
     <!-- [END footer js] -->
 
   </body>

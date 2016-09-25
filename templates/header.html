@@ -1,59 +1,9 @@
 
 {% block header %}
-<div class="navbar navbar-inverse navbar-fixed-top">
-    <header>
-        <div class="navbar-inner">
 
-            <div class="container">
-                <div class="row">
-
-                    <div class="header-zwcc col-xs-6 col-md-8 text-left">
-                        <div class="col-xs-6">
-                          <a href="#">Zero Waste Leaders</a>
-                        </div>
-                        <div class="col-xs-6">
-                          {% if user %}
-                          <a href="#"><em>{{ user.team }}<em></a>
-                          {% else %}
-                          <a href="#"> <em>- Leaderboard </em></a>
-                          {% endif %}
-                        </div>
-                    </div>
-
-                    <div class="header-tools col-xs-6 col-md-4 text-right">
-                      <!--<a href="{{ url|safe }}" class="btn">{{ url_linktext }}</a>-->
-                        {% if user %}
-                        <div class="add-audit col-xs-3">
-                          <a href="#"><span class="glyphicon glyphicon-plus"></span></a>
-                        </div>
-
-                        <div class="col-xs-4">
-                          <a href="http://localhost:8080{{ url }}" class="btn">{{ url_linktext }}</a>
-                        </div>
-                        <div class="main-menu-button col-xs-2">
-                          <a href="#menu-toggle" id="menu-toggle">
-                            <span class="glyphicon glyphicon-menu-hamburger">
-                            </span>
-                          </a>
-                        </div>
-                        {% else %}
-                        <div class="col-xs-12">
-                          <a href="/login" class="btn">Login</a>
-                          <a class="btn">or</a>
-                          <a href="/signup" class="btn">Signup</a>
-                        </div>
-                        {% endif %}
-                    </div>
-
-                </div>
-
-            </div>
-        </div>
-    </header>
-</div>
-
+{% if user %}
 <!-- Start Sliding Menu -->
-<div id="wrapper">
+<div id="wrapper" class="toggled">
   <!-- Sidebar -->
     <div id="sidebar-wrapper">
         <ul class="sidebar-nav">
@@ -88,8 +38,10 @@
             <li>
                 <a href="#">About</a>
             </li>
-            <li>
-                <a href="#">Services</a>
+            <li><!-- Upload New Data -->
+                <a href="#">
+                    Upload Data
+                </a>
             </li>
             <li>
                 <a href="/logout"><h3>Logout</h3></a>
@@ -97,8 +49,54 @@
         </ul>
     </div>
 </div>
+{% endif %}
 
 <!-- End Sliding Menu -->
 
+
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <header>
+        <div class="navbar-inner">
+
+            <div class="container">
+                <div class="row">
+
+                    <div class="header-zwcc col-xs-9 text-left">
+                        <div class="col-xs-3">
+                          <a href="#">Zero Waste Leaders</a>
+                        </div>
+                        <div class="col-xs-9 text-left">
+                          {% if user %}
+                          <a href="#"><em>{{ user.team }}</em></a>
+                          {% else %}
+                          <a href="#"><em>- Leaderboard </em></a>
+                          {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="header-tools col-xs-3 text-right">
+                        {% if user %}
+
+                        <div class="main-menu-button col-xs-12">
+                          <a href="#menu-toggle" id="menu-toggle">
+                            <span class="glyphicon glyphicon-menu-hamburger">
+                            </span>
+                          </a>
+                        </div>
+                        {% else %}
+                        <div class="col-xs-12">
+                          <a href="/login" class="btn">Login</a>
+                          <a class="btn">or</a>
+                          <a href="/signup" class="btn">Signup</a>
+                        </div>
+                        {% endif %}
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </header>
+</div>
 
 {% endblock %}
