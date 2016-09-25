@@ -21,21 +21,41 @@
   <body>
     {% include "header.html" %}
     <form method="post" style="text-align:center; font: 13px sans-serif">
-      <div class='login-form'>
-        <h3>Not logged in</h3>
+      <div class='row login-form'>
+        <div class="col-xs-4">
+            <!--<img src="http://placekitten.com/g/400/150"
+            class="img-rounded img-responsive" style="margin: 0 auto 0 auto">-->
+            <img src="images/grouch.png"
+            class="img-rounded img-responsive" style="margin: 0 auto 0 auto">
+            <h3>Let's. Get. <strong><span class="text-green">Green.</span></strong></h1>
+                     
+        </div>
+        <div class="col-xs-8">
+          <div class="col-xs-12">
+          <h3>Please log in</h3>
+          </div>
+          <div class="col-xs-3 text-left">
           <label for="email">Email:</label>
+          </div>
+          <div class="col-xs-9 text-left">
           <input name="email" type="email" value="{{ email }}" id="email">
           <p class="error-msg">{{ email_error }}</p>
-
+          </div>
+          <div class="col-xs-3 text-left">
           <label for="password">Password:</label>
+          </div>
+          <div class="col-xs-9 text-left">
           <input name="password" type="password">
           <p class="error-msg">{{ pwd_error1 }}</p>
           <p class="error-msg">{{ pwd_error2 }}</p>
-
+          </div>
+          <div class="col-xs-9 col-xs-offset-3 login-button">
           <input name="admin" type="checkbox" value="True" id="admin">
             <label for="admin">Sign in as Administrator</label><br>
 
-          <input name="action" value="Login" type="submit" class="btn"><br>
+            <input name="action" value="Login" type="submit" class="btn"><br>
+          </div>
+        </div>
       </div>
     <!--<input name="continue" type="hidden" value="http://localhost:8080/">-->
     </form>
