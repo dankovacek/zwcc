@@ -24,8 +24,30 @@ from models import Audit
 
 # [START waste_item]
 class WasteItem(ndb.Model):
-    id = ndb.IntegerProperty()
-    date = ndb.DateProperty()
+    # ItemId = ndb.IntegerProperty()  # Represented by entity key, which is auto-generated after we store object to data store
+    AppraisalDate = ndb.DateProperty()
+    InspectionType = ndb.StringProperty()
+    LeadAppraiser = ndb.StringProperty()
+    Country = ndb.StringProperty()
+    Province = ndb.StringProperty()
+    RegionalDistrict = ndb.StringProperty()
+    City_Town = ndb.StringProperty()
+    Neighbourhood = ndb.StringProperty()
+    StreetNumber = ndb.IntegerProperty()
+    StreetName = ndb.StringProperty()
+    ApartmentNumer = ndb.IntegerProperty()
+    PostalCode = ndb.StringProperty()
+    BuildingType = ndb.StringProperty()
+    NumberInhabitants = ndb.IntegerProperty()
+    PrimaryMaterial = ndb.StringProperty() # csv list
+    SecondaryMaterial = ndb.StringProperty() # TODO read this as csv list
+    TertQuatMaterial = ndb.StringProperty() # csv list
+    DisposalMethod = ndb.StringProperty()
+    WasteKg = ndb.FloatProperty()
+    RecycledKg = ndb.FloatProperty()
+    ReusedKg = ndb.FloatProperty()
+    KgInhabitant = ndb.FloatProperty()
+    AdditionalComments = ndb.StringProperty()
     '''
     These are the current column names in the upload template - can turn them into properties of the model
 
