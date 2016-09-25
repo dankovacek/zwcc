@@ -26,8 +26,11 @@
 
     {% include 'header.html' %}
     <div class="container">
-
+    <div class="row">
+    <div class="col-xs-12">
     <h1>Challenge Summary</h1>
+    </div>
+    </div>
     <div class="row">
       <div class="dash-main-content col-xs-4">
         <h3>Challenge Details</h3>
@@ -62,7 +65,7 @@
       </div>
       <div class="dash-main-content col-xs-8">
         <h3>Leader Board</h3>
-        <table class="table table-striped">
+        <table class="table table-striped leader-board">
         <thead>
         <tr>
           <th>Team</th>
@@ -116,6 +119,10 @@
         </tr>
         </tbody>
         </table>
+        <!-- Go to www.addthis.com/dashboard to customize your tools -->
+        <div class="text-right">
+        <div class="addthis_inline_share_toolbox"></div>
+        </div>
       </div>
     </div>
 
@@ -137,7 +144,7 @@
     <a href="#">+ Add New Challenge</a>
     </div>
     </div>
-    
+
 </div>
   </div>
     <!-- [START footer js] -->
@@ -148,7 +155,9 @@
         $("#wrapper").toggleClass("toggled");
       });
     </script>
+    
+    <!-- Go to www.addthis.com/dashboard to customize your tools -->
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-57e81e2cdc71e7db"></script>
     <!-- [END footer js] -->
-
   </body>
 </html>
