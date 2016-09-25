@@ -1,4 +1,7 @@
+application: envio-144519
+version: alpha-001
 runtime: python27
+module: default
 api_version: 1
 threadsafe: true
 

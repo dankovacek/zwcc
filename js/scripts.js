@@ -13,24 +13,18 @@ $(".glyph-check").click(function() {
 
 //slidey Oscar the Grouch Data Loader
 $("#data-submitter").click(function() {
-    oscar = $(".oscar-the-loader");
-    oscar.toggleClass( ".hide-oscar" );
-    console.log('fired click');
-    //when submit button is clicked, activate oscar-the-grouch loader
-/*    oscar.slideUp( 400 ).delay( 2000, function() {
-        //slide up 100px
-        ///$(".oscar-the-loader").delay( 2000, function() {
-        //});
-        //$(".oscar-the-loader").toggleClass( "hide-oscar" );
-        console.log('here?');
-        oscar.toggleClass( ".hide-oscar" );
+    oscar = $("#oscar-the-loader");
 
+    //oscar is hidden to start, unhide on click
+    oscar.toggleClass( "hide-oscar" );
+    //when submit button is clicked, activate oscar-the-grouch loader
+    oscar.slideUp( 500 ).delay( 1000, function() {
         oscar.delay( 6000, function() {
             console.log('or here?');
-            oscar.toggleClass( ".hide-oscar" );
+            //delay a few seconds to load, and hide again.
+            oscar.toggleClass( "hide-oscar" );
         });
-        console.log('how bout here?');
-    });*/
+    });
 
     //
 });
