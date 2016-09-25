@@ -33,6 +33,18 @@ form {
   margin: 0 auto 0 auto;
 }
 
+
+.form-control, input {
+  background-color: #b7b3b3;
+  border-box: none;
+  border:none;
+  box-shadow: none;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  -moz-transition: none;
+  -webkit-transition: none;
+}
+
 .team-img {
 
 }
@@ -55,10 +67,13 @@ form {
 .login-form {
     width: 50vw;
     margin: 10vh auto 0 auto;
+    font-size: 1.5em;
+    color: #337ab7;
     text-align:left;
     padding: 0.5em 2em 1.25em 2em;
-    background-color: #d6e9f8;
+    background-color: #222;
     border: 0;
+    border-radius: 1em;
 }
 
 .main-menu-button {
@@ -69,6 +84,14 @@ form {
 #menu-toggle {
   position: relative;
   right: -4vw;
+}
+
+.signup-form-header {
+
+}
+
+.signup-form-header img {
+  margin: 2em auto 0 auto;
 }
 
 .user-photo {
