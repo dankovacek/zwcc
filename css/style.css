@@ -57,12 +57,13 @@ a, a:hover{
 }
 
 .dash-main-content img {
-  margin: 0 auto 0 auto;
+  margin: 0 auto;
 }
 
 
 .form-control, select, input {
-  background-color: #000000;
+  background-color: #fff;
+  color:#000;
   border-box: none;
   border:none;
   box-shadow: none;
@@ -104,9 +105,9 @@ a, a:hover{
 
 .login-form {
     width: 50vw;
-    margin: 10vh auto 0 auto;
+    margin: 5vh auto 0 auto;
     font-size: 13px;
-    color: #1d8a4b;
+    color: #27ae60;
     text-align:left;
     padding: 0.5em 2em 1.25em 2em;
     /*background-color: #222;*/
@@ -147,8 +148,8 @@ button.close {
   margin: 2em auto 0 auto;
 }
 
-.team-img {
-
+.team-selector{
+  width:100%;
 }
 
 .user-photo {
@@ -203,4 +204,29 @@ a.return{
   margin-top:30px;
   font-size:18px;
   padding:10px;
+}
+.text-green{
+  color:#27ae60;
+}
+.login-button{
+  padding-top:10px;
+}
+.file-upload{
+  background:none;
+  color:#fff;
+}
+table{
+  font-size:12px;
+}
+.challenge-logos{
+  margin-top:20px;
+}
+.challenge-logo img{
+    width:100%;
+}
+.cov-logo {
+  margin-top:-20px;
+}
+.bclc-logo{
+  margin-top:-55px;
 }
