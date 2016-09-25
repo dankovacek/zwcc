@@ -21,7 +21,7 @@ $("#data-submitter").click(function() {
     //     "transition": "transform 500ms"
     // });
     $( "#oscar-the-loader" ).animate({ "top": "-=250px" }, 2500, function() {
-        $("#oscar-the-loader").delay( 1200 ).fadeOut( "fast", function() {
+        $("#oscar-the-loader").delay( 800 ).fadeOut( "fast", function() {
             $( ".data-upload-status" ).toggleClass( "hide-oscar" );
 
         });
@@ -33,7 +33,7 @@ $("#data-submitter").click(function() {
 
 //reset the modal animations when modal is closed
 $('.modal').on('hide.bs.modal', function (e) {
-    console.log('triggered on close?');
-  $( "#oscar-the-loader" ).animate({ "top": "+=250px" }, 100);
+    $( "#oscar-the-loader" ).animate({ "top": "+=250px" }, 100);
     $( "#oscar-the-loader" ).toggleClass( "hide-oscar" );
+    $( ".data-upload-status" ).toggleClass( "hide-oscar" );
 });
