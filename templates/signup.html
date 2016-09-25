@@ -7,8 +7,16 @@
     <!-- [START css] -->
     <link type="text/css" rel="stylesheet" href="/bootstrap/css/bootstrap.css">
     <link type="text/css" rel="stylesheet" href="/bootstrap/css/bootstrap-responsive.css">
-    <link type="text/css" rel="stylesheet" href="/css/style.css">
+    <link type="text/css" rel="stylesheet" href="css/style.css">
+    <link type="text/css" rel="stylesheet" href="css/map.css">
+    <link type="text/css" rel="stylesheet" href="css/sidebar-style.css">
+    <link rel="stylesheet" href="https://api.tiles.mapbox.com/mapbox-gl-js/v0.24.0/mapbox-gl.css" />
     <!-- [END css] -->
+    <!-- [START head js] -->
+    <script src="js/jquery-3.1.0.js"></script>
+    <!--<script src="/js/leaflet.ajax.min.js"></script>-->
+    <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v0.24.0/mapbox-gl.js"></script>
+    <!-- [END head js] -->
   </head>
   <body>
   {% include "header.html" %}
@@ -20,7 +28,9 @@
                 <div class="row">
                     <div class="signup-form-header">
                         <div class="col-xs-12 text-center">
-                            <img src="http://placekitten.com/g/400/150"
+                            <!--<img src="http://placekitten.com/g/400/150"
+                            class="img-rounded img-responsive" style="margin: 0 auto 0 auto">-->
+                            <img src="images/grouch.png"
                             class="img-rounded img-responsive" style="margin: 0 auto 0 auto">
                             <h1><em>Join the Challenge:</em></h1>
                         </div>
@@ -55,52 +65,72 @@
                         Email:</label>
                         <div class="col-xs-8">
                             <input class="form-control" name="email" type="email"
-                            value="{{ email }}" id="email"
-                            placeholder="example@example.com">
+                            value="" id="email" placeholder="example@example.com">
                         </div>
                         <p class="error-msg">{{ email_error }}</p>
                     </div>
                 </div>
 
                 <div class="row text-center" signin="signin-team-info">
-                    <h3>Part of a Team?</h3><span></span>
-                    <div class="form-group row text-right">
-                        <label for="team" class="col-xs-4 col-form-label">
-                        Organization Name:</label>
-                        <div class="col-xs-8">
-                            <input class="form-control" name="team" type="text"
-                            value="{{ team }}" id="team">
+                    <h3>Part of an Existing Team?
+                      <span class="glyphicon glyphicon-ok glyph-check"
+                      id="glyph-check"></span>
+                      <p class="small">(check if yes)</p>
+                    </h3>
+                    <div class="team-form form-hidden">
+                        <div class="form-group row text-right">
+                            <label for="org-name" class="col-xs-4 col-form-label">
+                            Organization Name:
+                            </label>
+                            <div class="col-xs-8">
+                                {% if teams %}
+                                    <select class="team-selector" name="teams">
+                                    {% for team in teams %}
+                                        <option>{{ team }}</option>
+                                    {% endfor%}
+                                    </select>
+                                {% endif %}
+                            </div>
                         </div>
-                        <p class="error-msg">{{ team_error }}</p>
                     </div>
 
-                    <div class="form-group row text-right">
-                        <label for="password" class="col-xs-4 col-form-label">
-                        Password:</label>
-                        <div class="col-xs-8">
-                            <input class="form-control" name="password"
-                            type="password" value="" id="password">
+                    <div class="team-form">
+                        <div class="form-group row text-right">
+                            <label for="org-type" class="col-xs-4 col-form-label">
+                            Organization Type:</label>
+                            <div class="col-xs-8">
+                                <select class="team-selector" name="org_type">
+                                    <option>Municipal</option>
+                                    <option>Commercial</option>
+                                    <option>Private Individual</option>
+                                </select>
+                            </div>
                         </div>
-                        <p class="error-msg">{{ pwd_error }}</p>
-                    </div>
 
-                    <div class="form-group row text-right">
-                        <label for="email" class="col-xs-4 col-form-label">
-                        Email:</label>
-                        <div class="col-xs-8">
-                            <input class="form-control" name="email" type="email"
-                            value="{{ email }}" id="email"
-                            placeholder="example@example.com">
+                        <div class="form-group row text-right">
+                            <label for="email" class="col-xs-4 col-form-label">
+                            Organization Name:</label>
+                            <div class="col-xs-8">
+                                <input class="form-control" name="org_name"
+                                type="text" id="team"
+                                placeholder="Organization Name">
+                            </div>
                         </div>
-                        <p class="error-msg">{{ email_error }}</p>
                     </div>
                 </div>
-
-                <input name="action" value="Register" type="submit">
+                <div class="row text-right">
+                  <input name="action" value="Register" type="submit">
+                </div>
             </div>
         </div>
 
 
     </form>
+    <!-- [START footer js] -->
+    <script src="js/bootstrap.min.js" async defer></script>
+    <!-- [Start Sliding Sidebar Menu Script] -->
+    <script src="js/scripts.js"></script>
+    <!-- [END footer js] -->
   </body>
+
 </html>

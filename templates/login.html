@@ -7,8 +7,16 @@
     <!-- [START css] -->
     <link type="text/css" rel="stylesheet" href="/bootstrap/css/bootstrap.css">
     <link type="text/css" rel="stylesheet" href="/bootstrap/css/bootstrap-responsive.css">
-    <link type="text/css" rel="stylesheet" href="/css/style.css">
+    <link type="text/css" rel="stylesheet" href="css/style.css">
+    <link type="text/css" rel="stylesheet" href="css/map.css">
+    <link type="text/css" rel="stylesheet" href="css/sidebar-style.css">
+    <link rel="stylesheet" href="https://api.tiles.mapbox.com/mapbox-gl-js/v0.24.0/mapbox-gl.css" />
     <!-- [END css] -->
+    <!-- [START head js] -->
+    <script src="js/jquery-3.1.0.js"></script>
+    <!--<script src="/js/leaflet.ajax.min.js"></script>-->
+    <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v0.24.0/mapbox-gl.js"></script>
+    <!-- [END head js] -->
   </head>
   <body>
     {% include "header.html" %}
@@ -31,6 +39,12 @@
       </div>
     <!--<input name="continue" type="hidden" value="http://localhost:8080/">-->
     </form>
+
+  <!-- [START footer js] -->
+    <script src="js/bootstrap.min.js" async defer></script>
+    <!-- [Start Sliding Sidebar Menu Script] -->
+    <script src="js/scripts.js"></script>
+    <!-- [END footer js] -->
   </body>
 </html>
 
