@@ -250,3 +250,20 @@ table{
 .bclc-logo{
   margin-top:-55px;
 }
+
+.leader-board{
+  margin-bottom:0px;
+}
+.mapboxgl-popup-content p{
+  color:#000;
+}
+.dash-main-content {
+  margin-bottom:20px;
+}
+.addthis_inline_share_toolbox{
+  padding-top:10px;
+}
+.user-profile{
+  width:220px;
+  height:220px;
+}
