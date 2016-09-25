@@ -17,10 +17,12 @@ $("#data-submitter").click(function() {
 
     //oscar is hidden to start, unhide on click
     oscar.toggleClass( "hide-oscar" );
+    console.log('fire1');
     //when submit button is clicked, activate oscar-the-grouch loader
-    oscar.slideUp( 500 ).delay( 1000, function() {
-        oscar.delay( 6000, function() {
-            console.log('or here?');
+    oscar.slideUp( 'slow', function() {
+        console.log('fire2');
+        oscar.fadeOut('slow').delay( 4000, function() {
+            console.log('fire3?');
             //delay a few seconds to load, and hide again.
             oscar.toggleClass( "hide-oscar" );
         });
