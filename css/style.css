@@ -61,8 +61,8 @@ a, a:hover{
 }
 
 
-.form-control, input {
-  background-color: #b7b3b3;
+.form-control, select, input {
+  background-color: #000000;
   border-box: none;
   border:none;
   box-shadow: none;
@@ -70,10 +70,21 @@ a, a:hover{
   -moz-box-shadow: none;
   -moz-transition: none;
   -webkit-transition: none;
+  padding: 0.25em;
 }
 
-.team-img {
+.glyph-check {
+  color: #7a7a7a;
+  font-size: 1.0em;
+}
 
+.highlight {
+  color: #2ecc26;
+  font-size: 1.75em;
+}
+
+.form-hidden {
+  display: none;
 }
 
 .logo-header {
@@ -119,6 +130,10 @@ a, a:hover{
 
 .signup-form-header img {
   margin: 2em auto 0 auto;
+}
+
+.team-img {
+
 }
 
 .user-photo {

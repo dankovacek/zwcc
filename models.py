@@ -30,26 +30,21 @@ class User(ndb.Model):
 
 # [START audit]
 class Audit(ndb.Model):
-    """A main model for representing an individual Guestbook entry."""
+    """A main model for representing an individual Audit entry."""
     user = ndb.StructuredProperty(User)
     content = ndb.StringProperty(indexed=False)
     date = ndb.DateTimeProperty(auto_now_add=True)
 
 class Team(ndb.Model):
-    admin = ndb.StructuredProperty(User)
+    admin = ndb.StringProperty(required=True)
     team_name = ndb.StringProperty(required=True)
-    organization_type = ndb.StringProperty(required=True)
+    organization_type = ndb.StringProperty(required=False)
     date = ndb.DateTimeProperty(auto_now_add=True)
-    team_img = ndb.StringProperty(required = False)
+    team_img = ndb.StringProperty(required=False)
+    members = ndb.StringProperty(repeated=True)
 
     @classmethod
-    def by_team_name(cls, name):
-        t = Team.all().filter('team_name =', name).get()
-        return t
-
-    @classmethod
-    def by_user_email(cls, email):
-        u = User.all().filter('email =', email).get()
-        team_name = u.team
-        t = by_team_name(team_name)
-        return t
+    def by_team_name(cls, team_name):
+        t = Team.gql("WHERE team_name = :team_name", team_name)
+        result = t.get()
+        return result

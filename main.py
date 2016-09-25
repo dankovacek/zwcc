@@ -18,6 +18,7 @@
 import os
 import urllib
 import re
+import json
 
 from google.appengine.api import users
 from google.appengine.ext import ndb
@@ -181,13 +182,19 @@ class Login(Handler):
 
 class Signup(Handler):
     def get(self):
-        self.render('signup.html', user='')
+        t = ['Vancouver', 'San Francisco', 'Toronto', 'New York City']
+        self.render('signup.html', user='', teams=t)
 
     def post(self):
         username = self.request.get('username')
         email = self.request.get('email')
         password = self.request.get('password')
-        team = self.request.get("team")
+        new_org_name = self.request.get("org_name")
+
+        org_type = self.request.get("org_type")
+
+        selected_existing_team = self.request.get("teams")
+
         #team_img = self.request.get("team_image")
         email_error, team_error, uname_error, pwd_error = '','','',''
 
@@ -198,11 +205,16 @@ class Signup(Handler):
         if not email:
             email_error = "Please use a valid email."
 
-        if not team:
+        if not (new_org_name and selected_existing_team):
             team_error = "Please put a valid team name."
 
         if not username:
             uname_error = "Please enter a username."
+
+        #use placeholder existing teams
+        #could be also done by keys-only query to teams
+        #filter by team_name
+        t = ['Vancouver', 'San Francisco', 'Toronto', 'New York City']
 
         #validate password
         #http://stackoverflow.com/questions/2990654/how-to-test-a-regex-password-in-python
@@ -210,27 +222,47 @@ class Signup(Handler):
             pwd_error = "Please enter an alphanumeric password >= 8 characters long."
 
         if (email_error or team_error or uname_error or pwd_error):
-            self.render("signup.html", username=username, email=email, team=team,
-             uname_error=uname_error, team_error=team_error,
-             email_error=email_error, pwd_error=pwd_error)
-            self.render('header.html', team_img='', login_out='login')
+            self.render("signup.html", username=username, email=email,
+                team=new_org_name, uname_error=uname_error,
+                team_error=team_error, email_error=email_error,
+                pwd_error=pwd_error, teams=t, org_type=org_type)
+            print 'what friggin error? %s, %s, %s, %s' % (email_error,
+                team_error, uname_error, pwd_error)
         else:
-            #create a new user
-            self.session['email'] = email
-            create_user(username, email, password, team, self.session)
-            self.render('index.html', user=user)
-            return
+            #check if team exists
+            #join user to existing team
+            print 'selected_existing_team?? = %s' % selected_existing_team
+            print 'org_type?? = %s' % org_type
+            if new_org_name:
+                create_new_team(username, new_org_name, org_type)
+                create_user(username, email, password, selected_existing_team, self.session)
+            else:
+                tm = Team.by_team_name(selected_existing_team)
+                members = tm.members
+                #store member names as a comma delimited string
+                members += [username]
+                #update team members
+                team.members.put()
+                create_user(username, email, password, members, selected_existing_team, self.session)
+
+            user = User.by_name(username)
+            self.render('index.html', user=user, teams=t)
+
 
 
 def create_user(name, email, password, team_name, session_obj):
     u = User.by_email(email)
 
-    print 'email here?  %s' % u
-
     # check if user already exists.
     if not u:
         new_user = User(name=name, password=password, email=email, team=team_name)
         new_user.put()
+
+
+def create_new_team(admin, team_name, organization_type):
+    new_team = Team(admin=admin, team_name=team_name, members=[admin],
+        organization_type=organization_type)
+    new_team.put()
 
 class Logout(Handler):
     def get(self):
