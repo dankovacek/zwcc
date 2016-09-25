@@ -7,28 +7,5 @@
     {% include 'sunburst.html' %}
   </div>
 
-  <div class="data-upload">
-    <form action="{{ upload_url }}" method="POST" enctype="multipart/form-data">
-        Upload File:
-        <input type="file" name="file"> <br>
-        <input type="submit" name="submit" value="Submit">
-    </form>
-  </div>
-
-
-<!--
-  <form action="/sign?team_name={{ team_name }}" method="post">
-    <div><textarea name="content" class="input-block-level" rows="3"></textarea></div>
-    <div><input type="submit" class="btn btn-large btn-primary" value="Save"></div>
-  </form>
-
-  <hr>
-
-  <form>Audit Form:
-
-    <input type="submit" value="switch">
-  </form>-->
-
-  <!--<a href="{{ url|safe }}">{{ url_linktext }}</a>-->
 </div>
 {% endblock %}

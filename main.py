@@ -175,10 +175,10 @@ class Login(Handler):
             self.render("login.html", email=email,
                 email_error=email_error, pwd_error1=pwd_error1,
                 pwd_error2=pwd_error2)
-            self.render('header.html', user='')
         else:
             self.session['email'] = email
-            self.render("index.html", user=user)
+            t = ['Vancouver', 'San Francisco', 'Toronto', 'New York City']
+            self.render("index.html", user=user, teams=t)
 
 class Signup(Handler):
     def get(self):
@@ -268,7 +268,6 @@ class Logout(Handler):
     def get(self):
         self.session['email'] = None
         self.redirect('/')
-        return
 
 # [START app]
 app = webapp2.WSGIApplication([

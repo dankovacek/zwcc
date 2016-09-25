@@ -35,11 +35,37 @@
     {% include 'content.html' %}
 
   </div>
-    <!-- [START footer js] -->
-    <script src="js/bootstrap.min.js" async defer></script>
-    <!-- [Start Sliding Sidebar Menu Script] -->
-    <script src="js/scripts.js"></script>
-    <!-- [END footer js] -->
+  <!-- [Start Modal] -->
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Upload Waste Audit Data</h4>
+        </div>
+        <div class="modal-body">
+           <div class="data-upload">
+            <form action="{{ upload_url }}" method="POST" enctype="multipart/form-data">
+                Upload File:
+                <input type="file" name="file" class="btn btn-primary"> <br>
+                <input type="submit" name="submit" value="Submit" class="btn btn-primary">
+            </form>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <p>Data can be uploaded in csv or json format.</p>
+          <p><a href="#">Download our template</a> for reference.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- [End Modal] -->
+
+  <!-- [START footer js] -->
+  <script src="js/bootstrap.min.js" async defer></script>
+  <!-- [Start Sliding Sidebar Menu Script] -->
+  <script src="js/scripts.js"></script>
+  <!-- [END footer js] -->
 
   </body>
 </html>
