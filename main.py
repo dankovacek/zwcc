@@ -124,23 +124,6 @@ class MainPage(Handler):
 
 # [END main_page]
 
-# TODO: implement create Team Entity
-# def CreateTeam(self, email, team_name):
-#     t = Team.by_email(email)
-#     # check if user already exists.
-
-#     if u:
-#         msg = 'User already registered.'
-#         self.redirect('/')
-#     else:
-#         new_user = User(username=session_obj['username'],
-#             email=session_obj['email'], picture=session_obj['picture'],
-#             provider=session_obj['provider'],
-#             provider_id=session_obj['provider_id'])
-#         new_user.put()
-#         user = getUserInfo(self, session_obj['email'])
-#         #return user
-
 
 # [START spreadsheet_import]
 
@@ -167,7 +150,6 @@ class Login(Handler):
         if not re.match(r'[A-Za-z0-9@#$%^&+=]{8,}', pwd):
             pwd_error1 = "Password must be alphanumeric and > 8 characters."
 
-        print '############   user passord = %s ' % user
         if user.password != pwd:
             pwd_error2 = "Incorrect password."
 
@@ -175,10 +157,11 @@ class Login(Handler):
             self.render("login.html", email=email,
                 email_error=email_error, pwd_error1=pwd_error1,
                 pwd_error2=pwd_error2)
-            self.render('header.html', user='')
         else:
             self.session['email'] = email
-            self.render("index.html", user=user)
+            t = ['Vancouver', 'San Francisco', 'Toronto', 'New York City']
+            self.render("index.html", user=user, teams=t)
+            self.redirect('/')
 
 class Signup(Handler):
     def get(self):
@@ -226,13 +209,9 @@ class Signup(Handler):
                 team=new_org_name, uname_error=uname_error,
                 team_error=team_error, email_error=email_error,
                 pwd_error=pwd_error, teams=t, org_type=org_type)
-            print 'what friggin error? %s, %s, %s, %s' % (email_error,
-                team_error, uname_error, pwd_error)
         else:
             #check if team exists
             #join user to existing team
-            print 'selected_existing_team?? = %s' % selected_existing_team
-            print 'org_type?? = %s' % org_type
             if new_org_name:
                 create_new_team(username, new_org_name, org_type)
                 create_user(username, email, password, selected_existing_team, self.session)
@@ -247,6 +226,7 @@ class Signup(Handler):
 
             user = User.by_name(username)
             self.render('index.html', user=user, teams=t)
+            self.redirect('/')
 
 
 
@@ -268,7 +248,6 @@ class Logout(Handler):
     def get(self):
         self.session['email'] = None
         self.redirect('/')
-        return
 
 class Challenges(Handler):
     def get(self):
