@@ -1,5 +1,6 @@
 {% block map %}
-<div class="dash-main-content col-xs-7 text-center">
+<div class="dash-main-content col-xs-7">
+    <h3>Waste by Region</h3>
      <div id="map"></div>
      <div id='area-legend' class='legend'>
 	    <h4>annual tonnes<br>per capita</h4>
@@ -29,7 +30,7 @@
 	map.on('load', function() {
 	  map.addSource('cov_localareas', {
 	    type: 'geojson',
-	    data: '/data/cov_localareas.geojson?i=1'
+	    data: '/data/cov_localareas.geojson'
 	  });
 	  map.addLayer({
 	    id: 'cov_localareas',

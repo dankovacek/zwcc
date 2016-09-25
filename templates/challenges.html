@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+    <!-- [START css] -->
+    <link type="text/css" rel="stylesheet" href="/bootstrap/css/bootstrap.css">
+    <link type="text/css" rel="stylesheet" href="/bootstrap/css/bootstrap-responsive.css">
+    <link type="text/css" rel="stylesheet" href="/css/style.css">
+    <link type="text/css" rel="stylesheet" href="/css/sidebar-style.css">
+    
+    <!-- [END css] -->
+    <!-- [START head js] -->
+
+    <script src="/js/jquery-3.1.0.js"></script>
+    <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v0.24.0/mapbox-gl.js"></script>
+    <script src="//d3js.org/d3.v3.min.js"></script>
+    
+    <!-- [Start Sliding Sidebar Menu Script] -->
+    <script src="js/scripts.js"></script>
+    <!-- [END head js] -->
+  </head>
+  <body>
+  <div style="container">
+
+    {% include 'header.html' %}
+    <div class="container">
+
+    <h1>Challenge Summary</h1>
+    <div class="row">
+      <div class="dash-main-content col-xs-5">
+        <h3>Challenge Details</h3>
+        <table class="table table-striped">
+        <tbody>
+        <tr>
+          <td><strong>Host</strong></td>
+          <td>City of Vancouver</td>
+        </tr>
+        <tr>
+          <td><strong>Sponsor</strong></td>
+          <td>BCLC</td>
+        </tr>
+        <tr>
+          <td><strong>Current Prize Amount</strong></td>
+          <td>$17,000.00</td>
+        </tr>
+        <tr>
+          <td><strong>Start Date</strong></td>
+          <td>2016-09-01</td>
+        </tr>
+        <tr>
+          <td><strong>End Date</strong></td>
+          <td>2016-10-31</td>
+        </tr>
+        </tbody>
+        </table>
+      </div>
+      <div class="dash-main-content col-xs-7">
+        <h3>Leader Board</h3>
+        <table class="table table-striped">
+        <thead>
+        <tr>
+          <th>Team</th>
+          <th>Waste per Capita</th>
+          <th>% Recycled</th>
+          <th>% Composed</th>
+          <th>% Landfilled</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td><strong>Victoria-Fraserview</strong></td>
+          <td>0.12 tonnes</td>
+          <td>42</td>
+          <td>36</td>
+          <td>22</td>
+        </tr>
+        <tr>
+          <td><strong>Hastings-Sunrise</strong></td>
+          <td>0.14 tonnes</td>
+          <td>39</td>
+          <td>45</td>
+          <td>16</td>
+        </tr>
+        <tr>
+          <td><strong>Sunset</strong></td>
+          <td>0.16 tonnes</td>
+          <td>23</td>
+          <td>30</td>
+          <td>47</td>
+        </tr>
+        <tr>
+          <td><strong>Strathcona</strong></td>
+          <td>0.19 tonnes</td>
+          <td>37</td>
+          <td>36</td>
+          <td>27</td>
+        </tr>
+        <tr>
+          <td><strong>Killarney</strong></td>
+          <td>0.19 tonnes</td>
+          <td>32</td>
+          <td>28</td>
+          <td>40</td>
+        </tr>
+        </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="row">
+    <div class="col-xs-12">
+    <a href="#">+ Add New Challenge</a>
+    </div>
+    </div>
+</div>
+  </div>
+    <!-- [START footer js] -->
+    <script src="js/bootstrap.min.js" async defer></script>
+    <script>
+      $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+      });
+    </script>
+    <!-- [END footer js] -->
+
+  </body>
+</html>
