@@ -9,13 +9,13 @@
     <link type="text/css" rel="stylesheet" href="/bootstrap/css/bootstrap-responsive.css">
     <link type="text/css" rel="stylesheet" href="/css/style.css">
     <link type="text/css" rel="stylesheet" href="/css/sidebar-style.css">
-    
+
     <!-- [END css] -->
     <!-- [START head js] -->
 
     <script src="/js/jquery-3.1.0.js"></script>
     <script src="//d3js.org/d3.v3.min.js"></script>
-    
+
     <!-- [Start Sliding Sidebar Menu Script] -->
     <script src="js/scripts.js"></script>
     <!-- [END head js] -->
@@ -70,21 +70,24 @@
     </div>
 </div>
   </div>
-    <!-- [Start Modal] -->
+
+  <!-- [Start Modal] -->
   <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <!--<div class="loading-status hide-oscar">Loading</div>-->
+  <div class="oscar-the-loader hide-oscar"></div>
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title" id="myModalLabel">Upload Audit Data</h4>
+          <h4 class="modal-title" id="myModalLabel">Upload Waste Audit Data</h4>
         </div>
         <div class="modal-body">
            <div class="data-upload">
             <form action="{{ upload_url }}" method="POST" enctype="multipart/form-data">
                 Upload File:
-                <input class="file-upload" type="file" name="file"> <br>
-                <input type="submit" name="submit" value="Submit" class="btn btn-primary">
+                <input type="file" name="file" class="btn btn-primary"> <br>
             </form>
+            <div id="data-submitter" class="btn btn-primary">Submit</div>
           </div>
         </div>
         <div class="modal-footer">

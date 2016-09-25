@@ -250,7 +250,9 @@ class Challenges(Handler):
 
 class Data(Handler):
     def get(self):
-        self.render('data.html', user='')
+        user = self.session['email']
+        u = User.by_email(user)
+        self.render('data.html', user=u)
         return
 
 # [START app]
