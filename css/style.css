@@ -183,7 +183,7 @@ button.close {
 }
 
 .table-striped > thead > tr{
-    background-color: #f39c12;
+    background-color: #95a5a6;
     color: #fff;
 }
 
@@ -239,7 +239,7 @@ table{
   font-size:12px;
 }
 .challenge-logos{
-  margin-top:20px;
+  margin-top:60px;
 }
 .challenge-logo img{
     width:100%;
@@ -248,7 +248,7 @@ table{
   margin-top:-20px;
 }
 .bclc-logo{
-  margin-top:-55px;
+  margin-top:-40px;
 }
 
 .leader-board{

@@ -9,13 +9,14 @@
     <link type="text/css" rel="stylesheet" href="/bootstrap/css/bootstrap-responsive.css">
     <link type="text/css" rel="stylesheet" href="/css/style.css">
     <link type="text/css" rel="stylesheet" href="/css/sidebar-style.css">
+    <link type="text/css" rel="stylesheet" href="/css/bar_chart.css">
     
     <!-- [END css] -->
     <!-- [START head js] -->
 
     <script src="/js/jquery-3.1.0.js"></script>
     <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v0.24.0/mapbox-gl.js"></script>
-    <script src="//d3js.org/d3.v3.min.js"></script>
+    <script src="//d3js.org/d3.v4.min.js"></script>
     
     <!-- [Start Sliding Sidebar Menu Script] -->
     <script src="js/scripts.js"></script>
@@ -62,6 +63,17 @@
         </tr>
         </tbody>
         </table>
+        <div class="row challenge-logos">
+          <div class="col-xs-4 challenge-logo cov-logo">
+            <img src="/images/cov.png">
+          </div>
+          <div class="col-xs-4 challenge-logo zwgc-logo">
+            <img src="/images/zwgc.png">
+          </div>
+          <div class="col-xs-4 challenge-logo bclc-logo">
+            <img src="/images/bclc.png">
+          </div>
+        </div>
       </div>
       <div class="dash-main-content col-xs-8">
         <h3>Leader Board</h3>
@@ -72,7 +84,7 @@
           <th>Rank</th>
           <th>Waste per Capita</th>
           <th>% Recycled</th>
-          <th>% Composed</th>
+          <th>% Composted</th>
           <th>% Landfilled</th>
         </tr>
         </thead>
@@ -123,20 +135,15 @@
         <div class="text-right">
         <div class="addthis_inline_share_toolbox"></div>
         </div>
+
+        <div class="bar-chart">
+        <svg width="765" height="200"></svg>
+        </div>
+
       </div>
     </div>
 
-    <div class="row challenge-logos">
-    <div class="col-xs-2 col-xs-offset-3 challenge-logo cov-logo">
-      <img src="/images/cov.png">
-    </div>
-    <div class="col-xs-2 challenge-logo zwgc-logo">
-      <img src="/images/zwgc.png">
-    </div>
-    <div class="col-xs-2 challenge-logo bclc-logo">
-      <img src="/images/bclc.png">
-    </div>
-    </div>
+    
 
 
     <div class="row">
@@ -158,6 +165,7 @@
     
     <!-- Go to www.addthis.com/dashboard to customize your tools -->
     <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-57e81e2cdc71e7db"></script>
+    <script type="text/javascript" src="/js/bar_chart.js"></script>
     <!-- [END footer js] -->
   </body>
 </html>
