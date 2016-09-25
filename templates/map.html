@@ -1,17 +1,131 @@
 {% block map %}
 <div class="dash-main-content col-xs-12 text-center">
      <div id="map"></div>
+     <div id='area-legend' class='legend'>
+	    <h4>annual tonnes per<br>capita</h4>
+	    <div><span style='background-color: #723122'></span>0.8</div>
+	    <div><span style='background-color: #8B4225'></span>0.7</div>
+	    <div><span style='background-color: #A25626'></span>0.6</div>
+	    <div><span style='background-color: #B86B25'></span>0.5</div>
+	    <div><span style='background-color: #CA8323'></span>0.4</div>
+	    <div><span style='background-color: #DA9C20'></span>0.3</div>
+	    <div><span style='background-color: #E6B71E'></span>0.2</div>
+	    <div><span style='background-color: #EED322'></span>0.1</div>
+	    <div><span style='background-color: #F2F12D'></span>0</div>
+	</div>
+
 </div>
 <script type="text/javascript">
+/*
+	var mymap = L.map('map').setView([49.2527, -123.1207], 12);
 
-	var mymap = L.map('map').setView([49.2827, -123.1207], 13);
-
-	L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+	L.tileLayer('https://api.mapbox.com/styles/v1/ggfitzg/cithmwzq5001p2ipktlihddu8/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZ2dmaXR6ZyIsImEiOiJjaXRobThsY3QwMjd1MnlvM2dxZ2pmaTZtIn0.n4RmIQ1KVIJF3p8qqWKL4A', {
 	    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
 	    maxZoom: 18,
-	    id: 'ggfitzg.a016pdph',
-	    accessToken: 'pk.eyJ1IjoiZ2dmaXR6ZyIsImEiOiJjaXRobTlpdG0wMXpqMm5udjl2Y3lyOGhkIn0.r2I5wZU61YGXIErEqrhbhA'
 	}).addTo(mymap);
+
+	var layer = L.mapbox.tileLayer('ggfitzg.a016pdph');
+
+
+	var geojsonLayer = new L.GeoJSON.AJAX("/data/cov_localareas.geojson");       
+	geojsonLayer.addTo(mymap);
+*/
+	mapboxgl.accessToken = 'pk.eyJ1IjoiZ2dmaXR6ZyIsImEiOiJjaXRobThsY3QwMjd1MnlvM2dxZ2pmaTZtIn0.n4RmIQ1KVIJF3p8qqWKL4A';
+
+	var map = new mapboxgl.Map({
+	    container: 'map',
+	    style: 'mapbox://styles/ggfitzg/cithqq1u9002e2jplddtrzmnb',
+	    //style: 'mapbox://styles/ggfitzg/cithmwzq5001p2ipktlihddu8',
+	    center: [-123.120,49.248], // starting position
+	    zoom: 11 // starting zoom
+	});
+
+
+	map.on('load', function() {
+	  map.addSource('cov_localareas', {
+	    type: 'geojson',
+	    data: '/data/cov_localareas.geojson?i=1'
+	  });
+	  map.addLayer({
+	    id: 'cov_localareas',
+	    type: 'fill',
+	    source: 'cov_localareas',
+	    'source-layer': 'cov_localareas',
+	    layout: {
+	      visibility: 'visible'
+	    },
+		paint: {
+            'fill-color': {
+                property: 'wpc',
+                stops: [
+                    [0, '#F2F12D'],
+                    [0.1, '#EED322'],
+                    [0.2, '#E6B71E'],
+                    [0.3, '#DA9C20'],
+                    [0.4, '#CA8323'],
+                    [0.5, '#B86B25'],
+                    [0.6, '#A25626'],
+                    [0.7, '#8B4225'],
+                    [0.8, '#723122']
+                ]
+            },
+            'fill-opacity': 0.75,
+            'fill-outline-color': '#fff',
+        }
+	    /*
+	    paint: {
+	    	'fill-color': 'hsla(188, 100%, 53%, 0.2)',
+	    	'fill-outline-color': 'hsla(188, 100%, 53%, 1.0)',
+	    }*/
+	  });
+	  map.addLayer({
+        id: 'route-hover',
+        type: 'fill',
+        source: 'cov_localareas',
+        layout: {},
+        paint: {
+            'fill-color': '#000',
+            'fill-opacity': 0.2
+        },
+        filter: ['==', 'name', '']
+	   });
+	});
+
+
+	// Create a popup, but don't add it to the map yet.
+	var popup = new mapboxgl.Popup({
+	    closeButton: false,
+	    closeOnClick: false
+	});
+
+
+	map.on('mousemove', function(e) {
+        var features = map.queryRenderedFeatures(e.point, { layers: ['cov_localareas'] });
+        // Change the cursor style as a UI indicator.
+        map.getCanvas().style.cursor = (features.length) ? 'pointer' : '';
+
+        if (!features.length) {
+            popup.remove();
+            return;
+        }
+
+        if (features.length) {
+            map.setFilter("route-hover", ["==", "name", features[0].properties.name]);
+        } else {
+            map.setFilter("route-hover", ["==", "name", ""]);
+        }
+
+        var feature = features[0];
+        var poptext = '<p><b>'+feature.properties.name+'</b></p><p>'+feature.properties.wpc+' tonnes per capita</p>';
+
+        popup.setLngLat(e.lngLat)
+            .setHTML(poptext)
+            .addTo(map);
+
+
+    });
+
+	var areaLegendEl = document.getElementById('area-legend');
 
 </script>
 {% endblock %}

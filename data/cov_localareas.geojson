@@ -919,7 +919,8 @@
                 "stroke": "0000ff",
                 "stroke-opacity": 1,
                 "fill-opacity": 0,
-                "Name": "Arbutus-Ridge"
+                "Name": "Arbutus-Ridge",
+                "wpc":0.78
             }
         },
         {
@@ -1756,7 +1757,8 @@
                 "stroke": "0000ff",
                 "stroke-opacity": 1,
                 "fill-opacity": 0,
-                "Name": "Shaughnessy"
+                "Name": "Shaughnessy",
+                "wpc":0.68
             }
         },
         {
@@ -2513,7 +2515,8 @@
                 "stroke": "0000ff",
                 "stroke-opacity": 1,
                 "fill-opacity": 0,
-                "Name": "Riley Park"
+                "Name": "Riley Park",
+                "wpc":0.42
             }
         },
         {
@@ -3206,7 +3209,8 @@
                 "stroke": "0000ff",
                 "stroke-opacity": 1,
                 "fill-opacity": 0,
-                "Name": "South Cambie"
+                "Name": "South Cambie",
+                "wpc":0.31
             }
         },
         {
@@ -4015,7 +4019,8 @@
                 "stroke": "0000ff",
                 "stroke-opacity": 1,
                 "fill-opacity": 0,
-                "Name": "Kensington-Cedar Cottage"
+                "Name": "Kensington-Cedar Cottage",
+                "wpc":0.24
             }
         },
         {
@@ -5212,7 +5217,8 @@
                 "stroke": "0000ff",
                 "stroke-opacity": 1,
                 "fill-opacity": 0,
-                "Name": "Renfrew-Collingwood"
+                "Name": "Renfrew-Collingwood",
+                "wpc":0.33
             }
         },
         {
@@ -5557,7 +5563,8 @@
                 "stroke": "0000ff",
                 "stroke-opacity": 1,
                 "fill-opacity": 0,
-                "Name": "Oakridge"
+                "Name": "Oakridge",
+                "wpc":0.53
             }
         },
         {
@@ -10946,7 +10953,8 @@
                 "stroke": "0000ff",
                 "stroke-opacity": 1,
                 "fill-opacity": 0,
-                "Name": "Killarney"
+                "Name": "Killarney",
+                "wpc":0.19
             }
         },
         {
@@ -14255,7 +14263,8 @@
                 "stroke": "0000ff",
                 "stroke-opacity": 1,
                 "fill-opacity": 0,
-                "Name": "Victoria-Fraserview"
+                "Name": "Victoria-Fraserview",
+                "wpc":0.12
             }
         },
         {
@@ -19212,7 +19221,8 @@
                 "stroke": "0000ff",
                 "stroke-opacity": 1,
                 "fill-opacity": 0,
-                "Name": "Sunset"
+                "Name": "Sunset",
+                "wpc":0.16
             }
         },
         {
@@ -27049,7 +27059,8 @@
                 "stroke": "0000ff",
                 "stroke-opacity": 1,
                 "fill-opacity": 0,
-                "Name": "Marpole"
+                "Name": "Marpole",
+                "wpc":0.36
             }
         },
         {
@@ -34330,7 +34341,8 @@
                 "stroke": "0000ff",
                 "stroke-opacity": 1,
                 "fill-opacity": 0,
-                "Name": "Kerrisdale"
+                "Name": "Kerrisdale",
+                "wpc":0.58
             }
         },
         {
@@ -44827,7 +44839,8 @@
                 "stroke": "0000ff",
                 "stroke-opacity": 1,
                 "fill-opacity": 0,
-                "Name": "Dunbar-Southlands"
+                "Name": "Dunbar-Southlands",
+                "wpc":0.76
             }
         },
         {
@@ -48112,7 +48125,8 @@
                 "stroke": "0000ff",
                 "stroke-opacity": 1,
                 "fill-opacity": 0,
-                "Name": "West Point Grey"
+                "Name": "West Point Grey",
+                "wpc":0.82
             }
         },
         {
@@ -53853,7 +53867,8 @@
                 "stroke": "0000ff",
                 "stroke-opacity": 1,
                 "fill-opacity": 0,
-                "Name": "Kitsilano"
+                "Name": "Kitsilano",
+                "wpc":0.63
             }
         },
         {
@@ -58330,7 +58345,8 @@
                 "stroke": "0000ff",
                 "stroke-opacity": 1,
                 "fill-opacity": 0,
-                "Name": "Fairview"
+                "Name": "Fairview",
+                "wpc":0.27
             }
         },
         {
@@ -61087,7 +61103,8 @@
                 "stroke": "0000ff",
                 "stroke-opacity": 1,
                 "fill-opacity": 0,
-                "Name": "Mount Pleasant"
+                "Name": "Mount Pleasant",
+                "wpc":0.24
             }
         },
         {
@@ -71236,7 +71253,8 @@
                 "stroke": "0000ff",
                 "stroke-opacity": 1,
                 "fill-opacity": 0,
-                "Name": "Downtown"
+                "Name": "Downtown",
+                "wpc":0.72
             }
         },
         {
@@ -74413,7 +74431,8 @@
                 "stroke": "0000ff",
                 "stroke-opacity": 1,
                 "fill-opacity": 0,
-                "Name": "West End"
+                "Name": "West End",
+                "wpc":0.28
             }
         },
         {
@@ -80506,7 +80525,8 @@
                 "stroke": "0000ff",
                 "stroke-opacity": 1,
                 "fill-opacity": 0,
-                "Name": "Strathcona"
+                "Name": "Strathcona",
+                "wpc":0.19
             }
         },
         {
@@ -83195,7 +83215,8 @@
                 "stroke": "0000ff",
                 "stroke-opacity": 1,
                 "fill-opacity": 0,
-                "Name": "Grandview-Woodland"
+                "Name": "Grandview-Woodland",
+                "wpc":0.41
             }
         },
         {
@@ -91592,7 +91613,8 @@
                 "stroke": "0000ff",
                 "stroke-opacity": 1,
                 "fill-opacity": 0,
-                "Name": "Hastings-Sunrise"
+                "Name": "Hastings-Sunrise",
+                "wpc":0.14
             }
         }
     ]
