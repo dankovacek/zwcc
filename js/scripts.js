@@ -15,11 +15,16 @@ $(".glyph-check").click(function() {
 $("#data-submitter").click(function() {
     //oscar is hidden to start, unhide on click
     //when submit button is clicked, activate oscar-the-grouch loader
-    $("#oscar-the-loader").slideUp( 'slow', function() {
-/*        $("#oscar-the-loader").fadeOut('slow', function() {
-            //delay a few seconds to load, and hide again.
-            //$("#oscar-the-loader").toggleClass( "hide-oscar" );
-        });*/
+    //
+    // $('#oscar-the-loader').animate({
+    //     "transform": "translate(0px,100px)",
+    //     "transition": "transform 500ms"
+    // });
+    $( "#oscar-the-loader" ).animate({ "top": "-=200px" }, 4000, function() {
+        $("#oscar-the-loader").delay( 2000 ).fadeOut( "fast", function() {
+
+        });
+
     });
 
     //
