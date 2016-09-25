@@ -29,33 +29,77 @@
     <h1>Contribute Data</h1>
     <div class="row">
       <div class="dash-main-content col-xs-4 text-center">
-        <div class="data-option">
+        <h3>Upload an Audit</h3>
+        <a data-toggle="modal" data-target="#myModal" class="option-link" href="#">
+        <div class="data-option upload-option">
           <img class="img-responsive" src="/images/upload.png">
         </div>
+        </a>
+        <p class="option-desc">
+          Have you already surveyed your environmental impacts? Looking for guidance on collecting your data? Upload them here, or complete a guided survey.
+        </p>
       </div>
       <div class="dash-main-content col-xs-4 text-center">
-        <div class="data-option">
-          <img class="img-responsive" src="/images/upload.png">
+        <h3>Connect Apps and Devices</h3>
+        <a class="option-link" href="#">
+        <div class="data-option iot-option">
+          <img class="img-responsive" src="/images/iot.png">
         </div>
+        </a>
+        <p class="option-desc">
+          Use data integrations to connect monitoring apps or devices. Help us grow our collection of dynamic, IoT-enabled data set.
+        </p>
       </div>
       <div class="dash-main-content col-xs-4 text-center">
-        <div class="data-option">
-          <img class="img-responsive" src="/images/upload.png">
+        <h3>Integrate Open Data Sets</h3>
+        <a class="option-link" href="#">
+        <div class="data-option open-option">
+          <img class="img-responsive" src="/images/open.png">
         </div>
+        </a>
+        <p class="option-desc">
+          Browse and incorporate open data sets to your analysis. View open data catalogues here.
+        </p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-4 col-xs-offset-4">
+        <a href="/" class="btn btn-warning btn-block btn-lg return">Return to Dashboard</a>
       </div>
     </div>
     </div>
 </div>
   </div>
-    <!-- [START footer js] -->
-    <script src="js/bootstrap.min.js" async defer></script>
-    <script>
-      $("#menu-toggle").click(function(e) {
-        e.preventDefault();
-        $("#wrapper").toggleClass("toggled");
-      });
-    </script>
-    <!-- [END footer js] -->
+    <!-- [Start Modal] -->
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Upload Audit Data</h4>
+        </div>
+        <div class="modal-body">
+           <div class="data-upload">
+            <form action="{{ upload_url }}" method="POST" enctype="multipart/form-data">
+                Upload File:
+                <input type="file" name="file"> <br>
+                <input type="submit" name="submit" value="Submit" class="btn btn-primary">
+            </form>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <p>Data can be uploaded in csv or json format.</p>
+          <p><a href="#">Download our template</a> for reference.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- [End Modal] -->
 
+  <!-- [START footer js] -->
+  <script src="js/bootstrap.min.js" async defer></script>
+  <!-- [Start Sliding Sidebar Menu Script] -->
+  <script src="js/scripts.js"></script>
+  <!-- [END footer js] -->
   </body>
 </html>
